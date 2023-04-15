@@ -4,41 +4,34 @@ import java.util.Scanner;
 public class App {
     public static void main(String[] args) throws Exception {
         clearScreen();
-        // System.out.println("Hello, World!");
-        // InnerApp.main(args);
-        // Scanner iScanner = new Scanner(System.in);
-        // System.out.print("name: "); // s: - подсказка от VS Code
-        // String name = iScanner.nextLine(); // Забираем строку из терминала ввода
-        // System.out.printf("Привет, %s!", name);
-        // System.out.println();
-        // iScanner.close();
+
         Random item = new Random();
-        //item.nextInt(0, 2);
-        int [] arr = new int[item.nextInt(10, 15)];//{1,0,1,0,0,1,1};
-        
+
+        int[] arr = new int[item.nextInt(20, 30)];// {1,0,1,0,0,1,1};
+        int arrVal = arr.length;
         System.out.print("arr = ");
-        for (int i = 0; i < arr.length; i++){
-            arr[i] = item.nextInt(0, 2);
+        for (int i = 0; i < arrVal; i++) {
+            arr[i] = item.nextInt(2, 5);
             System.out.printf("%d  ", arr[i]);
         }
-        
-        int curr_count = 0;
-        int max_count = 0;
-        for (int i = 0; i < arr.length; i++ ){
-            if (arr[i]  == 1) {
-                curr_count ++;
-            }
-            else {
-                if (max_count < curr_count){
-                    max_count = curr_count;
-                }
-                curr_count = 0;
+        System.out.println("\nМассив заполнен");
+        int val = 3;
+        int count = 0;
+        for (int i = 0; i < arrVal; i++) {
+            if (arr[i] != val) {
+
+                arr[count++] = arr[i];
+
             }
         }
-        if (max_count < curr_count){
-            max_count = curr_count;
+        while (count < arrVal)
+            arr[count++] = val;
+
+        System.out.println("\nМассив отсортирован");
+        for (int i = 0; i < arrVal; i++) {
+            System.out.printf("%d  ", arr[i]);
         }
-        System.out.printf("\nmax_count = %d \n", max_count);
+        System.out.println();
 
     }
 
@@ -68,3 +61,22 @@ public class App {
         return o.getClass().getSimpleName();
     }
 }
+
+/*public class Main {
+    public static void main(String[] args) {
+        int [] arr = new int[]{1,3,3,2,4,3,5,3,3}; //1 2 4 5 3,3,3,3,3
+        int val = 3;
+        int count = 0;
+
+        for (int i = 0; i < arr.length; i++)
+            if (arr[i] != val) {
+                arr[count++] = arr[i];
+            }
+        while (count < arr.length)
+            arr[count++] = val;
+        for (int i : arr) {
+            System.out.println(i);
+        }
+    }
+    
+}*/
