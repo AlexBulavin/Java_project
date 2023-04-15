@@ -9,6 +9,7 @@ public class App {
         System.out.printf("name: ");
         String name = iScanner.nextLine();
         System.out.printf("Привет, %s!", name);
+        System.out.println();
         iScanner.close();
     }
 /*
