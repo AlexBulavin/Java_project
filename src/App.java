@@ -11,7 +11,7 @@ public class App {
         // System.out.printf("Привет, %s!", name);
         // System.out.println();
         // iScanner.close();
-        int [] arr = new int[]{1,1,0,1,1,1};
+        int [] arr = new int[]{1,0,1,0,0,1,1};
         int curr_count = 0;
         int max_count = 0;
         for (int i = 0; i < arr.length; i++ ){
