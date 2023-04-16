@@ -1,0 +1,6 @@
+# Ignore all files except .java and .md files
+*
+!/*.java
+!/*.md
+profile/*
+
