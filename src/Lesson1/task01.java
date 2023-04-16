@@ -9,14 +9,16 @@ public class task01 {
     public static void main(String[] args) throws Exception {
         clearScreen();
         Random item = new Random();
-        int randomNumber = item.nextInt(200, 500);
+        int randomNumber = item.nextInt(5, 25);
 
-        System.out.printf("Случайное число - %d, сумма 1 - n = %d\n", randomNumber, randomNumber*(randomNumber+1)/2);
-
+        System.out.printf("Случайное число - %d\nCумма 1 - n = %d\n%d! = %d\n", randomNumber, randomNumber*(randomNumber+1)/2, randomNumber, factorial(randomNumber));
     }
-    public static void factorial() { //Реализовать рекурсией
-        
-        return 
+    public static int factorial(int n) {
+        if (n == 0) {
+            return 1;
+        } else {
+            return n * factorial(n - 1);
+        }
     }
 
     /*
