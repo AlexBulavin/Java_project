@@ -1,11 +1,9 @@
 package Lesson1;
 
-// import java.util.Arrays;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import jdk.jfr.Recording;
-// import jdk.jfr.FlightRecorder;
 import jdk.jfr.consumer.RecordedEvent;
 import jdk.jfr.consumer.RecordingFile;
 import java.util.Scanner;
@@ -23,69 +21,85 @@ public class task04 {
         recording.start();
         // --------------- Начало рабочего кода ----------------------
         clearScreen();
+        // Проверочные примеры: 86? * 32? = 27638? 12? + 4?5 = 558 63? + ?30 = 86?
+        // ?2?-???=?0
+        String[] expressions = { //Проверочный массив для разных вариантов ввода, операторов и знаков ? внутри числа.
+                "86? * 32? = 27638?",
+                "12? + 4?5 = 558",
+                "63? + ?30 = 86?",
+                "?2-???=?0"
+        };
+        // Создаем новый массив на 1 элемент больше, чем исходный массив
+        String[] newExpressions = new String[expressions.length + 1];
 
+        // Копируем все элементы из исходного массива в новый массив
+        System.arraycopy(expressions, 0, newExpressions, 0, expressions.length);
         // Решать нужно подстановкой
         Scanner scanner = new Scanner(System.in);
         System.out.print("Введите выражение вида q?qq?? + ww?www?? = e?e, где q, w, e >= 0: ");
         String input = scanner.nextLine();
-
+        // Добавляем пользовательский элемент в конец нового массива
+        newExpressions[newExpressions.length - 1] = input;
+        for (int i = 0; i < newExpressions.length; i++) {
+            System.out.println(newExpressions[i]);
+        }
+       
         String regex = "(\\s*[0-9?]*\\s*)([+\\-*\\/])(\\s*[0-9?]*\\s*)(=)(\\s*[0-9?]*\\s*)";
         Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(input);
+        
         String q = "";
         String w = "";
         String e = "";
         Character operator = null;
+        for (String newExpression : newExpressions) {
+            Matcher matcher = pattern.matcher(newExpression);
+            if (matcher.find()) {
+                q = matcher.group(1);
+                w = matcher.group(3);
+                e = matcher.group(5);
+                operator = matcher.group(2).charAt(0);
+                for (Integer i = 0; i < 10; i++) {
+                    String operand1 = q.replace("?", i.toString());//Подставляем проверочные цифры на место ?
+                    String operand2 = w.replace("?", i.toString());
+                    String operand3 = e.replace("?", i.toString());
+                    operand1 = operand1.replace(" ", "");//Удаляем лишние пробелы
+                    operand2 = operand2.replace(" ", "");
+                    operand3 = operand3.replace(" ", "");
 
-        if (matcher.find()) {
-            q =  matcher.group(1); 
-            w =  matcher.group(3); 
-            e =  matcher.group(5); 
-            operator = matcher.group(2).charAt(0);
-            for (Integer i = 0; i < 10; i++) {
-                String operand1 = q.replace("?", i.toString());
-                String operand2 = w.replace("?", i.toString());
-                String operand3 = e.replace("?", i.toString());
-                operand1 = operand1.replace(" ", "");
-                operand2 = operand2.replace(" ", "");
-                operand3 = operand3.replace(" ", "");
+                    // --------Логика проверки здесь--------
+                    Integer calculatedResult = 0;
+                    Integer equasion = Integer.parseInt(operand3);
 
-                // --------Логика проверки здесь--------
-                Integer calculatedResult = 0;
-                Integer equasion = Integer.parseInt(operand3);
-                //Проверочные примеры: 86? * 32? = 27638?  12? + 4?5 = 558 63? + ?30 = 86? ?2?-???=?0
-                // System.out.printf("equasion = %s\n", equasion);
-                // System.out.printf("%s %s %s = %s\n", operand1, operator, operand2, operand3);
-                Boolean trigger = false;
-                //System.out.printf("Line 58 operator.toString() = %s\n",operator.toString());
-                switch (operator.toString()) {
-                    case "+":
-                        calculatedResult = Integer.parseInt(operand1) + Integer.parseInt(operand2);
-                        trigger = true;
-                        break;
-                    case "-":
-                        calculatedResult = Integer.parseInt(operand1) - Integer.parseInt(operand2);
-                        trigger = true;
-                        break;
-                    case "*":
-                        calculatedResult = Integer.parseInt(operand1) * Integer.parseInt(operand2);
-                        trigger = true;
-                        break;
-                    case "/":
-                        calculatedResult = Integer.parseInt(operand1) / Integer.parseInt(operand2);
-                        trigger = true;
-                        break;
+                    Boolean trigger = false;
+                    switch (operator.toString()) {
+                        case "+":
+                            calculatedResult = Integer.parseInt(operand1) + Integer.parseInt(operand2);
+                            trigger = true;
+                            break;
+                        case "-":
+                            calculatedResult = Integer.parseInt(operand1) - Integer.parseInt(operand2);
+                            trigger = true;
+                            break;
+                        case "*":
+                            calculatedResult = Integer.parseInt(operand1) * Integer.parseInt(operand2);
+                            trigger = true;
+                            break;
+                        case "/":
+                            calculatedResult = Integer.parseInt(operand1) / Integer.parseInt(operand2);
+                            trigger = true;
+                            break;
+                    }
+                    if (((calculatedResult - equasion) == 0) && trigger) {
+                        System.out.printf("Найдено значение для формулы: \n%s\n", newExpression);
+                        System.out.printf("%s %s %s = %s\n", operand1, operator, operand2, equasion);
+                    }
+                    trigger = false;
                 }
-                if (((calculatedResult - equasion) == 0) && trigger) {
-                    System.out.println("Найдено значение для формулы:");
-                    System.out.printf("%s %s %s = %s\n", operand1, operator, operand2, equasion);  
-                }
-                trigger = false;
+
+            } else {
+                System.out.println("Выражение не соответствует формату.");
+                return;
             }
-
-        } else {
-            System.out.println("Выражение не соответствует формату.");
-            return;
         }
         // --------------- Окончание рабочего кода ----------------------
         // Останавливаем запись событий
