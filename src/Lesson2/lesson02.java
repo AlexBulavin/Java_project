@@ -7,7 +7,7 @@ public class lesson02 {
         String c2 = "b";
         // extracted(n, c1, c2);
         // arj();
-        System.out.println(palindrom("12345g66g54321"));
+        System.out.println(palindrom("12345g1661g54321"));
 
     }
 
@@ -27,7 +27,7 @@ public class lesson02 {
         // char letter = ;
         for (int i = 0; i < start.length() - 1; i++) {
 //Выяснить где проблема!!! - Вылет за размер 
-            while (i + 1 < start.length() && start.charAt(i) == start.charAt(i + 1) ) {
+            while (i + counter < start.length() && start.charAt(i) == start.charAt(i + counter) ) {
                 counter++;
                 j++;
             }

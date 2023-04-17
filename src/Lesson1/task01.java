@@ -9,11 +9,11 @@ public class task01 {
     public static void main(String[] args) throws Exception {
         clearScreen();
         Random item = new Random();
-        int randomNumber = item.nextInt(5, 25);
+        int randomNumber = item.nextInt(15, 20);
 
         System.out.printf("Случайное число - %d\nCумма 1 - n = %d\n%d! = %d\n", randomNumber, randomNumber*(randomNumber+1)/2, randomNumber, factorial(randomNumber));
     }
-    public static int factorial(int n) {
+    public static long factorial(long n) {
         if (n == 0) {
             return 1;
         } else {
