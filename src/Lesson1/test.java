@@ -3,7 +3,7 @@ package Lesson1;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class test04 {
+public class test {
     public static void main_2(String[] args) {
         String[] expressions = {
                 "86? * 32? = 27638?",
