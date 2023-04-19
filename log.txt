@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-04-19T18:21:51.590871Z</date>
+  <millis>1681928511590</millis>
+  <nanos>871000</nanos>
+  <sequence>0</sequence>
+  <logger>Lesson2.task01</logger>
+  <level>INFO</level>
+  <class>Lesson2.task01</class>
+  <method>main</method>
+  <thread>1</thread>
+  <message>Исходный массив: [5, 3, 8, 6, 7, 2, 1, 0, 0, 9, 15]</message>
+</record>
+<record>
+  <date>2023-04-19T18:21:51.696048Z</date>
+  <millis>1681928511696</millis>
+  <nanos>48000</nanos>
+  <sequence>1</sequence>
+  <logger>Lesson2.task01</logger>
+  <level>INFO</level>
+  <class>Lesson2.task01</class>
+  <method>bubbleSort</method>
+  <thread>1</thread>
+  <message>After iteration 1: [3, 5, 6, 7, 2, 1, 0, 0, 8, 9, 15]</message>
+</record>
+<record>
+  <date>2023-04-19T18:21:51.696976Z</date>
+  <millis>1681928511696</millis>
+  <nanos>976000</nanos>
+  <sequence>2</sequence>
+  <logger>Lesson2.task01</logger>
+  <level>INFO</level>
+  <class>Lesson2.task01</class>
+  <method>bubbleSort</method>
+  <thread>1</thread>
+  <message>After iteration 2: [3, 5, 6, 2, 1, 0, 0, 7, 8, 9, 15]</message>
+</record>
+<record>
+  <date>2023-04-19T18:21:51.697820Z</date>
+  <millis>1681928511697</millis>
+  <nanos>820000</nanos>
+  <sequence>3</sequence>
+  <logger>Lesson2.task01</logger>
+  <level>INFO</level>
+  <class>Lesson2.task01</class>
+  <method>bubbleSort</method>
+  <thread>1</thread>
+  <message>After iteration 3: [3, 5, 2, 1, 0, 0, 6, 7, 8, 9, 15]</message>
+</record>
+<record>
+  <date>2023-04-19T18:21:51.698716Z</date>
+  <millis>1681928511698</millis>
+  <nanos>716000</nanos>
+  <sequence>4</sequence>
+  <logger>Lesson2.task01</logger>
+  <level>INFO</level>
+  <class>Lesson2.task01</class>
+  <method>bubbleSort</method>
+  <thread>1</thread>
+  <message>After iteration 4: [3, 2, 1, 0, 0, 5, 6, 7, 8, 9, 15]</message>
+</record>
+<record>
+  <date>2023-04-19T18:21:51.699450Z</date>
+  <millis>1681928511699</millis>
+  <nanos>450000</nanos>
+  <sequence>5</sequence>
+  <logger>Lesson2.task01</logger>
+  <level>INFO</level>
+  <class>Lesson2.task01</class>
+  <method>bubbleSort</method>
+  <thread>1</thread>
+  <message>After iteration 5: [2, 1, 0, 0, 3, 5, 6, 7, 8, 9, 15]</message>
+</record>
+<record>
+  <date>2023-04-19T18:21:51.700531Z</date>
+  <millis>1681928511700</millis>
+  <nanos>531000</nanos>
+  <sequence>6</sequence>
+  <logger>Lesson2.task01</logger>
+  <level>INFO</level>
+  <class>Lesson2.task01</class>
+  <method>bubbleSort</method>
+  <thread>1</thread>
+  <message>After iteration 6: [1, 0, 0, 2, 3, 5, 6, 7, 8, 9, 15]</message>
+</record>
+<record>
+  <date>2023-04-19T18:21:51.701385Z</date>
+  <millis>1681928511701</millis>
+  <nanos>385000</nanos>
+  <sequence>7</sequence>
+  <logger>Lesson2.task01</logger>
+  <level>INFO</level>
+  <class>Lesson2.task01</class>
+  <method>bubbleSort</method>
+  <thread>1</thread>
+  <message>After iteration 7: [0, 0, 1, 2, 3, 5, 6, 7, 8, 9, 15]</message>
+</record>
+<record>
+  <date>2023-04-19T18:21:51.702282Z</date>
+  <millis>1681928511702</millis>
+  <nanos>282000</nanos>
+  <sequence>8</sequence>
+  <logger>Lesson2.task01</logger>
+  <level>INFO</level>
+  <class>Lesson2.task01</class>
+  <method>bubbleSort</method>
+  <thread>1</thread>
+  <message>After iteration 8: [0, 0, 1, 2, 3, 5, 6, 7, 8, 9, 15]</message>
+</record>
+<record>
+  <date>2023-04-19T18:21:51.702937Z</date>
+  <millis>1681928511702</millis>
+  <nanos>937000</nanos>
+  <sequence>9</sequence>
+  <logger>Lesson2.task01</logger>
+  <level>INFO</level>
+  <class>Lesson2.task01</class>
+  <method>main</method>
+  <thread>1</thread>
+  <message>Отсортированный массив: [0, 0, 1, 2, 3, 5, 6, 7, 8, 9, 15]</message>
+</record>
+</log>
