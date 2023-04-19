@@ -41,7 +41,7 @@ public class task02 {
         String line;
         while ((line = br.readLine()) != null) {
             String[] parts = line.split("[,:]"); // разбиваем строку по запятым и двоеточиям
-            String surname = parts[1].replace("\"", "");
+            String surname = parts[1].replace("\"", ""); //Удаляем "
             String mark = parts[3].replace("\"", "");
             String subject = parts[5].replace("\"", "");
             StringBuilder sb = new StringBuilder();
