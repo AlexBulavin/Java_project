@@ -21,7 +21,7 @@ import java.io.IOException;
 public class task02 {
     public static void main(String[] args) {
         clearScreen();
-        String filePath = "src/Lesson2/evaluation_list.txt"; // замените на путь к вашему файлу
+        String filePath = "src/Lesson2/evaluation_list.txt"; // Указываем путь к файлу с данными
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             parserAndBuilder(br);
         } catch (IOException e) {
@@ -41,7 +41,7 @@ public class task02 {
         String line;
         while ((line = br.readLine()) != null) {
             String[] parts = line.split("[,:]"); // разбиваем строку по запятым и двоеточиям
-            String surname = parts[1].replace("\"", ""); //Удаляем "
+            String surname = parts[1].replace("\"", ""); // Удаляем лишние кавычки
             String mark = parts[3].replace("\"", "");
             String subject = parts[5].replace("\"", "");
             StringBuilder sb = new StringBuilder();
