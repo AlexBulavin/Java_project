@@ -1,5 +1,5 @@
 package Lesson2;
-
+//Class work
 public class lesson02 {
     public static void main(String[] args) throws Exception {
         int n = 20;
