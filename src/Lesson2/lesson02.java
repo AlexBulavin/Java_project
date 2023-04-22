@@ -3,6 +3,7 @@ package Lesson2;
 //Class work
 public class lesson02 {
     public static void main(String[] args) throws Exception {
+        clearScreen();
         int n = 20;
         String c1 = "a";
         String c2 = "b";
@@ -32,13 +33,15 @@ public class lesson02 {
             }
             if (counter > 1) {
                 result.append(start.charAt(i) + counter.toString());
-
             } else {
                 result.append(start.charAt(i));
             }
             i += counter - 1;
             counter = 1;
-            //System.out.printf("%s\n", result.toString());//Проверка для пошаговой отладки, если понадобится отлаживаться
+            //
+            // System.out.printf("%s\n", result.toString());//Проверка для пошаговой
+            // отладки, если понадобится отлаживаться
+            
         }
         System.out.printf("%s\n", result.toString());
     }
@@ -57,15 +60,14 @@ public class lesson02 {
 
     }
 
-}
-// clearScreen();
-// Random item = new Random();
-// int randomNumber = item.nextInt(5, 25);
+    // Random item = new Random();
+    // int randomNumber = item.nextInt(5, 25);
 
-// /*
-// * Метод очистки консоли терминала
-// */
-// public static void clearScreen() {
-// System.out.print("\033[H\033[2J");
-// System.out.flush();
-// }
+    /*
+     * Метод очистки консоли терминала
+     */
+    public static void clearScreen() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
+}
