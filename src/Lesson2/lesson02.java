@@ -6,7 +6,7 @@ public class lesson02 {
         String c1 = "a";
         String c2 = "b";
         // extracted(n, c1, c2);
-        // arj();
+        arj();
         System.out.println(palindrom("12345g1661g54321"));
 
     }
@@ -18,16 +18,17 @@ public class lesson02 {
         }
         System.out.printf("%s\n", result.toString());
     }
-/*
+
     private static void arj() {
-        StringBuilder start = new StringBuilder("aabbbcddaaa");
+        StringBuilder start = new StringBuilder("aabbbcddaaa"); //Записать в виде a2b3cd2a3
         StringBuilder result = new StringBuilder("");
         Integer counter = 1;
         int j = 1;
         // char letter = ;
         for (int i = 0; i < start.length() - 1; i++) {
-//Выяснить где проблема!!! - Вылет за размер 
-            while (i + counter < start.length() && start.charAt(i) == start.charAt(i + counter) ) {
+            System.out.printf("line 29 %s\n", start.charAt(i));
+//Выяснить где проблема!!! - неправильно кодирует
+            while (i + counter < start.length() - 1 && start.charAt(i) == start.charAt(i + counter) ) {
                 counter++;
                 j++;
             }
@@ -35,15 +36,17 @@ public class lesson02 {
             j = 1;
             if (counter > 1) {
                 result.append(start.charAt(i) + counter.toString());
+                
             } else {
                 result.append(start.charAt(i));
             }
+            i += counter - 1;
             counter = 1;
             System.out.printf("%s\n", result.toString());
         }
         System.out.printf("%s\n", result.toString());
     }
-    */
+
     private static boolean palindrom(String word) {
         int i1 = 0;
         int i2 = word.length()-1;
