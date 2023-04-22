@@ -1,4 +1,5 @@
 package Lesson2;
+
 //Class work
 public class lesson02 {
     public static void main(String[] args) throws Exception {
@@ -20,41 +21,36 @@ public class lesson02 {
     }
 
     private static void arj() {
-        StringBuilder start = new StringBuilder("aabbbcddaaa"); //Записать в виде a2b3cd2a3
+        StringBuilder start = new StringBuilder("aabbbcddaaa"); // Ожидаемый результат - записать в виде a2b3cd2a3
         StringBuilder result = new StringBuilder("");
         Integer counter = 1;
-        int j = 1;
-        // char letter = ;
+        System.out.println(start);
         for (int i = 0; i < start.length() - 1; i++) {
-            System.out.printf("line 29 %s\n", start.charAt(i));
-//Выяснить где проблема!!! - неправильно кодирует
-            while (i + counter < start.length() - 1 && start.charAt(i) == start.charAt(i + counter) ) {
+            // Рабочий код
+            while (i + counter < start.length() && start.charAt(i) == start.charAt(i + counter)) {
                 counter++;
-                j++;
             }
-            i += j;
-            j = 1;
             if (counter > 1) {
                 result.append(start.charAt(i) + counter.toString());
-                
+
             } else {
                 result.append(start.charAt(i));
             }
             i += counter - 1;
             counter = 1;
-            System.out.printf("%s\n", result.toString());
+            //System.out.printf("%s\n", result.toString());//Проверка для пошаговой отладки, если понадобится отлаживаться
         }
         System.out.printf("%s\n", result.toString());
     }
 
     private static boolean palindrom(String word) {
         int i1 = 0;
-        int i2 = word.length()-1;
-        while(i2 > i1){
-            if(word.charAt(i1) != word.charAt(i2)){
+        int i2 = word.length() - 1;
+        while (i2 > i1) {
+            if (word.charAt(i1) != word.charAt(i2)) {
                 return false;
             }
-            i1 ++;
+            i1++;
             i2--;
         }
         return true;
