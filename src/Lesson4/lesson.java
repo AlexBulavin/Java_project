@@ -165,3 +165,52 @@ public class lesson {
         System.out.flush();
     }
 }
+
+/*
+ * public class t3 {
+    public static void main(String[] args) {
+        System.out.print("\033[H\033[2J");
+        Scanner sc = new Scanner(System.in);
+        Deque<String> list = new LinkedList<>();
+
+        boolean stop = false;
+        String line = "";
+        while (!stop) {
+            line = sc.nextLine();
+            if (line.equals("stop")) {
+                stop = true;
+            } else {
+                if (line.equals("print")) {
+                    while (list.size() > 0) {
+                        System.out.println(list.pop());
+                    }
+                } else {
+                    list.push(line);
+                }
+            }
+            
+        }
+        sc.close();
+    }
+}
+ * 
+ */
+
+ /*
+  * Scanner scan = new Scanner(System.in);
+        String userStr = "";
+        Deque<String> strList = new ArrayDeque<>();
+        while (!userStr.equals("print")) {
+            userStr = scan.nextLine();
+            if (userStr.contains("print")) {
+
+                Iterator ditr = strList.descendingIterator();
+                while(ditr.hasNext()){
+                    System.out.println(ditr.next());
+                }
+            }else {
+                strList.add(userStr);
+            }
+            
+        }
+  */
