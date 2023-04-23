@@ -29,31 +29,104 @@ public class lesson {
         // --------------- Начало рабочего кода ----------------------
         clearScreen();
         // 1) Замерьте время, за которое в ArrayList добавятся 100000 элементов.
-        //2) Замерьте время, за которое в LinkedList добавятся 100000 элементов. Сравните с предыдущим.
+        // 2) Замерьте время, за которое в LinkedList добавятся 100000 элементов.
+        // Сравните с предыдущим.
         long statTime1 = System.currentTimeMillis();
-        ArrayList <Integer> arr = new ArrayList<>();
+        ArrayList<Integer> arr = new ArrayList<>();
         // Random rnd = new Random();
-        Integer arrSize = 500000;//rnd.nextInt(10, 50);
-        
+        Integer arrSize = 1000;// 500000;//rnd.nextInt(10, 50);
+
         Double averageValue = 0.0;
 
         for (int i = 0; i < arrSize; i++) {
-            arr.add(0, i);//(rnd.nextInt(50));
-            //LOGGER.info("arr[" + i + "] = " + arr.get(i));
-            
+            arr.add(0, i);// (rnd.nextInt(50));
+            // LOGGER.info("arr[" + i + "] = " + arr.get(i));
+
         }
         long endTime1 = System.currentTimeMillis() - statTime1;
         long statTime2 = System.currentTimeMillis();
-        LinkedList <Integer> arr2 = new LinkedList<>();
+        LinkedList<Integer> arr2 = new LinkedList<>();
         for (int i = 0; i < arrSize; i++) {
-            arr2.add(0, i);//(rnd.nextInt(50));
-            //LOGGER.info("arr[" + i + "] = " + arr.get(i));
-            
+            arr2.add(0, i);// (rnd.nextInt(50));
+            // LOGGER.info("arr[" + i + "] = " + arr.get(i));
+
         }
         long endTime2 = System.currentTimeMillis() - statTime2;
-        System.out.println("Время выполнения через ArrayList = " + endTime1);     
+        System.out.println("Время выполнения через ArrayList = " + endTime1);
         System.out.println("Время выполнения через LinkedList = " + endTime2);
-   
+
+        // Реализовать консольное приложение, которое:
+        /*
+         * 1. Принимает от пользователя строку вида text
+         * 
+         * 1. Нужно сохранить text в связный список.
+         * 2. Если введено print~num, выводит строку из позиции num в связном списке и
+         * удаляет её из списка
+         * Цикл пока не введено stop
+         * 
+         * asd
+         * [asd]
+         * sdf
+         * [asd,sdf]
+         * qwe
+         * [asd,sdf,qwe]
+         * print~2
+         * sdf
+         * [asd,qwe]
+         * print~2
+         * qwe
+         * [asd]
+         */
+        // Ниже рабочий кода
+        /*
+         * String input = "";
+         * Scanner sk = new Scanner(System.in);
+         * LinkedList<String> arr3 = new LinkedList<>();
+         * Integer index = 0;
+         * System.out.print("Введите строку или stop или print~число: ");
+         * input = sk.nextLine();
+         * boolean trigger = false;
+         * while (!input.equals("stop")) {
+         * if (input.contains("print")) {
+         * String subs = input.substring(input.indexOf("~") + 1);
+         * try {
+         * index = Integer.parseInt(subs);
+         * } catch (Exception e2) {
+         * System.out.print("Ошибка ввода,");
+         * trigger = true;
+         * }
+         * if (!trigger) {
+         * String item = arr3.get(index);
+         * System.out.println(item);
+         * arr3.remove(item);
+         * }
+         * 
+         * } else {
+         * arr3.add(input);
+         * }
+         * trigger = false;
+         * System.out.println(arr3);
+         * input = sk.nextLine();
+         * }
+         */
+
+        // Задача 3
+        /*
+         * Реализовать консольное приложение, которое:
+         * 
+         * 1. Принимает от пользователя и “запоминает” строки.
+         * 2. Если введено print, выводит строки так, чтобы последняя введенная была
+         * первой в списке, а первая - последней.
+         * 
+         * asd
+         * qwe
+         * zxc
+         * print
+         * zxc
+         * qwe
+         * asd
+         */
+
         // --------------- Окончание рабочего кода ----------------------
         // Останавливаем запись событий
         recording.stop();
