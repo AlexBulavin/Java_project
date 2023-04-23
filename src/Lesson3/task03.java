@@ -6,20 +6,19 @@ import java.nio.file.Paths;
 import jdk.jfr.Recording;
 import jdk.jfr.consumer.RecordedEvent;
 import jdk.jfr.consumer.RecordingFile;
-
+import java.util.Collections;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.logging.*;
 
-public class task01 {
+public class task03 {
 
     public static void main(String[] args) throws Exception {
         Logger LOGGER = Logger.getLogger(lesson.class.getName());
         // Создаем файловый обработчик
-        FileHandler fileHandler = new FileHandler("Lesson3task01Log.txt", false);
+        FileHandler fileHandler = new FileHandler("Lesson3task03Log.txt", false);
         // Добавляем обработчик к логгеру
         LOGGER.addHandler(fileHandler);
 
@@ -28,22 +27,24 @@ public class task01 {
         recording.start();
         // --------------- Начало рабочего кода ----------------------
         clearScreen();
-        // (Дополнительно) Реализовать алгоритм сортировки слиянием
-        // #################################
-        ArrayList<Integer> arr = new ArrayList<>();
+        // Задан целочисленный список ArrayList. Найти минимальное, максимальное и среднее из этого списка.
+
+        ArrayList <Integer> arr = new ArrayList<>();
         Random rnd = new Random();
-        Integer arrSize = rnd.nextInt(10, 20);
-        // Заполнили массив
+        Integer arrSize = rnd.nextInt(10, 50);
+        
+        Double averageValue = 0.0;
         for (int i = 0; i < arrSize; i++) {
             arr.add(rnd.nextInt(50));
-            // LOGGER.info("arr[" + i + "] = " + arr.get(i));
+            LOGGER.info("arr[" + i + "] = " + arr.get(i));
+            averageValue += arr.get(i);
         }
-
-        System.out.println("Исходный массив: " + arr);
-        mergeSort(arr);
-        System.out.println("Отсортированный массив: " + arr);
-         // [1, 2, 3, 4, 5, 6]
-
+        averageValue = averageValue / arrSize;
+        System.out.println("Base arr:\t\t" + arr);     
+        System.out.println("min of arr =\t\t" + Collections.min(arr));
+        System.out.println("max of arr =\t\t" + Collections.max(arr));
+        System.out.println("average of arr =\t" + averageValue);
+   
         // --------------- Окончание рабочего кода ----------------------
         // Останавливаем запись событий
         recording.stop();
@@ -71,43 +72,7 @@ public class task01 {
         }
     }
 
-    public static void mergeSort(List<Integer> incomingArr) {
-        if (incomingArr.size() > 1) {
-            System.out.println("line 76" + incomingArr);
-            int mid = incomingArr.size() / 2;
-            List<Integer> leftArr = incomingArr.subList( 0, mid);
-            List<Integer> rightArr = incomingArr.subList( mid, incomingArr.size());
-            mergeSort(leftArr);
-            mergeSort(rightArr);
-            merge(incomingArr, leftArr, rightArr);
-            System.out.println("line 83" + incomingArr);
-            System.out.println("line 84" + leftArr);
-            System.out.println("line 85" + rightArr);
-        }
-    }
-
-    private static void merge(List<Integer> arr, List<Integer> leftArr, List<Integer> rightArr) {
-        int i = 0, j = 0, k = 0;
-        while (i < leftArr.size() && j < rightArr.size()) {
-            if (leftArr.get(i) <= rightArr.get(j)) {
-                arr.set(k, leftArr.get(i));
-                i++;
-            } else {
-                arr.set(k, rightArr.get(i));
-                j++;
-            }
-            k++;
-        }
-        while (i < leftArr.size()) {
-            arr.set(k, leftArr.get(i));
-            i++;
-            k++;
-        }
-        while (j < rightArr.size()) {
-            arr.set(k, rightArr.get(j));
-            j++;
-            k++;
-        }
+    private static void min(ArrayList<Integer> arr) {
     }
 
     /*
