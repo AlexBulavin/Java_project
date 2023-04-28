@@ -29,20 +29,19 @@ public class task01 {
         // --------------- Начало рабочего кода ----------------------
         clearScreen();
         // (Дополнительно) Реализовать алгоритм сортировки слиянием
-        // #################################
         ArrayList<Integer> arr = new ArrayList<>();
         Random rnd = new Random();
-        Integer arrSize = rnd.nextInt(10, 20);
+        Integer arrSize = rnd.nextInt(5, 20);
         // Заполнили массив
         for (int i = 0; i < arrSize; i++) {
             arr.add(rnd.nextInt(50));
-            // LOGGER.info("arr[" + i + "] = " + arr.get(i));
+            LOGGER.info("arr[" + i + "] = " + arr.get(i));
         }
 
-        System.out.println("Исходный массив: " + arr);
+        System.out.println("Исходный массив: \t" + arr);
         mergeSort(arr);
-        System.out.println("Отсортированный массив: " + arr);
-         // [1, 2, 3, 4, 5, 6]
+        System.out.println("Отсортированный массив:\t" + arr);
+  
 
         // --------------- Окончание рабочего кода ----------------------
         // Останавливаем запись событий
@@ -73,40 +72,38 @@ public class task01 {
 
     public static void mergeSort(List<Integer> incomingArr) {
         if (incomingArr.size() > 1) {
-            System.out.println("line 76" + incomingArr);
             int mid = incomingArr.size() / 2;
-            List<Integer> leftArr = incomingArr.subList( 0, mid);
-            List<Integer> rightArr = incomingArr.subList( mid, incomingArr.size());
+            List<Integer> leftArr = incomingArr.subList(0, mid);
+            List<Integer> rightArr = incomingArr.subList(mid, incomingArr.size());
             mergeSort(leftArr);
             mergeSort(rightArr);
             merge(incomingArr, leftArr, rightArr);
-            System.out.println("line 83" + incomingArr);
-            System.out.println("line 84" + leftArr);
-            System.out.println("line 85" + rightArr);
+
         }
     }
 
     private static void merge(List<Integer> arr, List<Integer> leftArr, List<Integer> rightArr) {
-        int i = 0, j = 0, k = 0;
+        List<Integer> resultArr = new ArrayList<>();
+        int i = 0, j = 0;
         while (i < leftArr.size() && j < rightArr.size()) {
             if (leftArr.get(i) <= rightArr.get(j)) {
-                arr.set(k, leftArr.get(i));
+                resultArr.add(leftArr.get(i));
                 i++;
             } else {
-                arr.set(k, rightArr.get(i));
+                resultArr.add(rightArr.get(j));
                 j++;
             }
-            k++;
         }
         while (i < leftArr.size()) {
-            arr.set(k, leftArr.get(i));
+            resultArr.add(leftArr.get(i));
             i++;
-            k++;
         }
         while (j < rightArr.size()) {
-            arr.set(k, rightArr.get(j));
+            resultArr.add(rightArr.get(j));
             j++;
-            k++;
+        }
+        for (int k = 0; k < resultArr.size(); k++) {
+            arr.set(k, resultArr.get(k));
         }
     }
 

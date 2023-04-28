@@ -1,4 +1,124 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
+<record>
+  <date>2023-04-28T05:51:42.945748Z</date>
+  <millis>1682661102945</millis>
+  <nanos>748000</nanos>
+  <sequence>0</sequence>
+  <logger>Lesson3.lesson</logger>
+  <level>INFO</level>
+  <class>Lesson3.task01</class>
+  <method>main</method>
+  <thread>1</thread>
+  <message>arr[0] = 12</message>
+</record>
+<record>
+  <date>2023-04-28T05:51:42.999149Z</date>
+  <millis>1682661102999</millis>
+  <nanos>149000</nanos>
+  <sequence>1</sequence>
+  <logger>Lesson3.lesson</logger>
+  <level>INFO</level>
+  <class>Lesson3.task01</class>
+  <method>main</method>
+  <thread>1</thread>
+  <message>arr[1] = 17</message>
+</record>
+<record>
+  <date>2023-04-28T05:51:43.000497Z</date>
+  <millis>1682661103000</millis>
+  <nanos>497000</nanos>
+  <sequence>2</sequence>
+  <logger>Lesson3.lesson</logger>
+  <level>INFO</level>
+  <class>Lesson3.task01</class>
+  <method>main</method>
+  <thread>1</thread>
+  <message>arr[2] = 10</message>
+</record>
+<record>
+  <date>2023-04-28T05:51:43.001716Z</date>
+  <millis>1682661103001</millis>
+  <nanos>716000</nanos>
+  <sequence>3</sequence>
+  <logger>Lesson3.lesson</logger>
+  <level>INFO</level>
+  <class>Lesson3.task01</class>
+  <method>main</method>
+  <thread>1</thread>
+  <message>arr[3] = 10</message>
+</record>
+<record>
+  <date>2023-04-28T05:51:43.002567Z</date>
+  <millis>1682661103002</millis>
+  <nanos>567000</nanos>
+  <sequence>4</sequence>
+  <logger>Lesson3.lesson</logger>
+  <level>INFO</level>
+  <class>Lesson3.task01</class>
+  <method>main</method>
+  <thread>1</thread>
+  <message>arr[4] = 48</message>
+</record>
+<record>
+  <date>2023-04-28T05:51:43.003700Z</date>
+  <millis>1682661103003</millis>
+  <nanos>700000</nanos>
+  <sequence>5</sequence>
+  <logger>Lesson3.lesson</logger>
+  <level>INFO</level>
+  <class>Lesson3.task01</class>
+  <method>main</method>
+  <thread>1</thread>
+  <message>arr[5] = 19</message>
+</record>
+<record>
+  <date>2023-04-28T05:51:43.005340Z</date>
+  <millis>1682661103005</millis>
+  <nanos>340000</nanos>
+  <sequence>6</sequence>
+  <logger>Lesson3.lesson</logger>
+  <level>INFO</level>
+  <class>Lesson3.task01</class>
+  <method>main</method>
+  <thread>1</thread>
+  <message>arr[6] = 33</message>
+</record>
+<record>
+  <date>2023-04-28T05:51:43.007097Z</date>
+  <millis>1682661103007</millis>
+  <nanos>97000</nanos>
+  <sequence>7</sequence>
+  <logger>Lesson3.lesson</logger>
+  <level>INFO</level>
+  <class>Lesson3.task01</class>
+  <method>main</method>
+  <thread>1</thread>
+  <message>arr[7] = 41</message>
+</record>
+<record>
+  <date>2023-04-28T05:51:43.008199Z</date>
+  <millis>1682661103008</millis>
+  <nanos>199000</nanos>
+  <sequence>8</sequence>
+  <logger>Lesson3.lesson</logger>
+  <level>INFO</level>
+  <class>Lesson3.task01</class>
+  <method>main</method>
+  <thread>1</thread>
+  <message>arr[8] = 27</message>
+</record>
+<record>
+  <date>2023-04-28T05:51:43.010053Z</date>
+  <millis>1682661103010</millis>
+  <nanos>53000</nanos>
+  <sequence>9</sequence>
+  <logger>Lesson3.lesson</logger>
+  <level>INFO</level>
+  <class>Lesson3.task01</class>
+  <method>main</method>
+  <thread>1</thread>
+  <message>arr[9] = 41</message>
+</record>
 </log>

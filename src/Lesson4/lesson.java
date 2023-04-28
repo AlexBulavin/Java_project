@@ -126,6 +126,32 @@ public class lesson {
          * qwe
          * asd
          */
+        /*
+         * private static final Scanner sc = new Scanner(System.in);
+public static void main(String[] args) {
+        Deque<String> deque = new ArrayDeque<>();
+
+        while (true) {
+            String str = sc.nextLine();
+            if (str.contains("print")) {
+                extract(deque);
+                break;
+            } else {
+                deque.add(str);
+                System.out.println(deque);
+            }
+        }
+        System.out.println();
+    }
+
+    private static void extract(Deque<String> deque) {
+        while (!deque.isEmpty()) {
+            String last1 = deque.getLast();
+            System.out.println(last1);
+            deque.removeLast();
+        }
+    }
+         */
 
         // --------------- Окончание рабочего кода ----------------------
         // Останавливаем запись событий
