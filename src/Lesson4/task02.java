@@ -24,7 +24,7 @@ public class task02 {
         FileHandler fileHandler = new FileHandler("Lesson4task02Log.txt", false);
         // Добавляем обработчик к логгеру
         LOGGER.addHandler(fileHandler);
-        boolean debugMode = true; //false; //Задали режим отладки. В нём будут писаться и авводиться логи. Иначе -
+        boolean debugMode = false;//true; Задали режим отладки. В нём будут писаться и авводиться логи. Иначе -
         // не будут.
 
         // Начинаем запись событий
@@ -82,9 +82,9 @@ public class task02 {
         System.out.println("customQueue.dequeue()");
         System.out.println(linkedList);
 
-        customQueue.first();
+        
         System.out.println("customQueue.first()");
-        System.out.println(linkedList);
+        System.out.println(customQueue.first());
         // --------------- Окончание рабочего кода ----------------------
         // Останавливаем запись событий
         recording.stop();
