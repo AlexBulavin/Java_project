@@ -7,10 +7,8 @@ import jdk.jfr.Recording;
 import jdk.jfr.consumer.RecordedEvent;
 import jdk.jfr.consumer.RecordingFile;
 import java.util.Collections;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.Random;
-import java.util.Scanner;
 import java.util.logging.*;
 
 public class task01 {
@@ -22,29 +20,43 @@ public class task01 {
         // Добавляем обработчик к логгеру
         LOGGER.addHandler(fileHandler);
 
+        boolean debugMode = false; // true; //Задали режим отладки. В нём будут писаться и авводиться логи. Иначе -
+                                   // не будут.
+
         // Начинаем запись событий
+
         Recording recording = new Recording();
         recording.start();
         // --------------- Начало рабочего кода ----------------------
         clearScreen();
-        // Задан целочисленный список ArrayList. Найти минимальное, максимальное и среднее из этого списка.
+        // Пусть дан LinkedList с несколькими элементами. Реализуйте метод(не void),
+        // который вернет “перевернутый” список.
 
-        ArrayList <Integer> arr = new ArrayList<>();
         Random rnd = new Random();
-        Integer arrSize = rnd.nextInt(10, 50);
-        
-        Double averageValue = 0.0;
-        for (int i = 0; i < arrSize; i++) {
-            arr.add(rnd.nextInt(50));
-            LOGGER.info("arr[" + i + "] = " + arr.get(i));
-            averageValue += arr.get(i);
-        }
-        averageValue = averageValue / arrSize;
-        System.out.println("Base arr:\t\t" + arr);     
-        System.out.println("min of arr =\t\t" + Collections.min(arr));
-        System.out.println("max of arr =\t\t" + Collections.max(arr));
-        System.out.println("average of arr =\t" + averageValue);
-   
+        LinkedList<Integer> linkedList = new LinkedList<>();
+        // Создаём экземпляр LinkedList и заполняем его случайными числами в диапазоне
+        // minLen, maxLen
+        int minLen, maxLen, minItem, maxItem;
+        // Задаём границы длины LinkedList. Можно это сделать хардкодом, можно попросить
+        // пользователя ввести данные, можно рндомайзером и так далее
+        minLen = 5;
+        maxLen = 15;
+        minItem = 5;
+        maxItem = 95;
+        int lengthLinkedList = rnd.nextInt(minLen, maxLen);
+        if (debugMode)
+            LOGGER.info("lengthLinkedList = " + lengthLinkedList);
+
+        fillInRandomIntInRange(LOGGER, debugMode, rnd, linkedList, minItem, maxItem, lengthLinkedList);
+
+        System.out.println("LinkedList со случайными элементами:");
+        System.out.println(linkedList);
+        // Создаем перевернутый список и заполняем его элементами первого списка,
+        // "перевёрнутые" методом Collections.reverse
+        // LinkedList<Integer> reversedLinkedList = reverseLinkedList(linkedList, LOGGER, debugMode);
+        System.out.println("Перевернутый LinkedList:");
+        System.out.println(reverseLinkedList(linkedList, LOGGER, debugMode));
+
         // --------------- Окончание рабочего кода ----------------------
         // Останавливаем запись событий
         recording.stop();
@@ -72,7 +84,23 @@ public class task01 {
         }
     }
 
-    private static void min(ArrayList<Integer> arr) {
+    private static void fillInRandomIntInRange(Logger LOGGER, boolean debugMode, Random rnd,
+            LinkedList<Integer> linkedList,
+            int minItem, int maxItem, int lengthLinkedList) {
+        for (int i = 0; i < lengthLinkedList; i++) {
+            int item = rnd.nextInt(maxItem) + minItem; // случайный элемент в диапазоне minItem - maxItem;
+            linkedList.add(item);
+            if (debugMode)
+                LOGGER.info(" new LinkedList item = " + item);
+        }
+    }
+
+    public static LinkedList<Integer> reverseLinkedList(LinkedList<Integer> list, Logger LOGGER, boolean debugMode) {
+        LinkedList<Integer> reversedList = new LinkedList<>(list);
+        Collections.reverse(reversedList);
+        if (debugMode)
+            LOGGER.info("reversedList = " + reversedList);
+        return reversedList;
     }
 
     /*
