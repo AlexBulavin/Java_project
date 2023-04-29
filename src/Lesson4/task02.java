@@ -7,11 +7,14 @@ import jdk.jfr.Recording;
 import jdk.jfr.consumer.RecordedEvent;
 import jdk.jfr.consumer.RecordingFile;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.logging.*;
+import Lesson4.CustomQueue;
+import Lesson4.task01;//task01.fillInRandomIntInRange;
 
 public class task02 {
 
@@ -21,57 +24,67 @@ public class task02 {
         FileHandler fileHandler = new FileHandler("Lesson4task02Log.txt", false);
         // Добавляем обработчик к логгеру
         LOGGER.addHandler(fileHandler);
+        boolean debugMode = true; //false; //Задали режим отладки. В нём будут писаться и авводиться логи. Иначе -
+        // не будут.
 
         // Начинаем запись событий
         Recording recording = new Recording();
         recording.start();
         // --------------- Начало рабочего кода ----------------------
         clearScreen();
- /*     2) Реализуйте очередь с помощью LinkedList со следующими методами:
-enqueue() - помещает элемент в конец очереди,
-dequeue() - возвращает первый элемент из очереди и удаляет его,
-first() - возвращает первый элемент из очереди, не удаляя.
+        /*
+         * 2) Реализуйте очередь с помощью LinkedList со следующими методами:
+         * enqueue() - помещает элемент в конец очереди,
+         * dequeue() - возвращает первый элемент из очереди и удаляет его,
+         * first() - возвращает первый элемент из очереди, не удаляя.
+         * 
+         * Пример:
+         * [1, 2, 3, 4, 5, 6, 7]
+         * spisok.enqueue(8)
+         * [1, 2, 3, 4, 5, 6, 7,8]
+         * spisok.dequeue
+         * 1
+         * [2, 3, 4, 5, 6, 7,8]
+         * spisok.first()
+         * 2
+         * [2, 3, 4, 5, 6, 7,8]
+         * 
+         */
 
-Пример:
-[1, 2, 3, 4, 5, 6, 7]
-spisok.enqueue(8)
-[1, 2, 3, 4, 5, 6, 7,8]
-spisok.dequeue
-1
-[2, 3, 4, 5, 6, 7,8]
-spisok.first()
-2
-[2, 3, 4, 5, 6, 7,8]
-
- * ответ:
-9
-
-1
-Ответ 8
-Отмена -> 9
-Отмена -> 7
-Отмена -> 3
-+
-2
-Ответ 5
- */
-
-        ArrayList <Integer> arr = new ArrayList<>();
         Random rnd = new Random();
-        Integer arrSize = rnd.nextInt(10, 50);
-        
-        Double averageValue = 0.0;
-        for (int i = 0; i < arrSize; i++) {
-            arr.add(rnd.nextInt(50));
-            LOGGER.info("arr[" + i + "] = " + arr.get(i));
-            averageValue += arr.get(i);
-        }
-        averageValue = averageValue / arrSize;
-        System.out.println("Base arr:\t\t" + arr);     
-        System.out.println("min of arr =\t\t" + Collections.min(arr));
-        System.out.println("max of arr =\t\t" + Collections.max(arr));
-        System.out.println("average of arr =\t" + averageValue);
-   
+        LinkedList<Integer> linkedList = new LinkedList<>();
+        // Создаём экземпляр LinkedList и заполняем его случайными числами в диапазоне
+        // minLen, maxLen
+        int minLen, maxLen, minItem, maxItem;
+        // Задаём границы длины LinkedList. Можно это сделать хардкодом, можно попросить
+        // пользователя ввести данные, можно рндомайзером и так далее
+        minLen = 5;
+        maxLen = 15;
+        minItem = 5;
+        maxItem = 95;
+        int lengthLinkedList = rnd.nextInt(minLen, maxLen);
+        if (debugMode)
+            LOGGER.info("lengthLinkedList = " + lengthLinkedList);
+        Lesson4.task01 task01 = new task01();
+        task01.fillInRandomIntInRange(LOGGER, debugMode, rnd, linkedList, minItem, maxItem, lengthLinkedList);
+
+        System.out.println("LinkedList со случайными элементами:");
+        System.out.println(linkedList);
+
+        //В классе CustomQueue реализовали нужные по Д/З методы, создаём экземпляр класса ниже вызываем его методы и проверяем.
+        Lesson4.CustomQueue customQueue = new CustomQueue(LOGGER, debugMode, linkedList);
+        int itemToPutIn = 8; //Произвольное число типа int, которое мы добавляем в очередь
+        customQueue.enqueue(8);
+        System.out.println("customQueue.enqueue(" + 8 +"):");
+        System.out.println(linkedList);
+
+        customQueue.dequeue();
+        System.out.println("customQueue.dequeue()");
+        System.out.println(linkedList);
+
+        customQueue.first();
+        System.out.println("customQueue.first()");
+        System.out.println(linkedList);
         // --------------- Окончание рабочего кода ----------------------
         // Останавливаем запись событий
         recording.stop();
@@ -97,9 +110,6 @@ spisok.first()
             // Обработка исключения
             e.printStackTrace();
         }
-    }
-
-    private static void min(ArrayList<Integer> arr) {
     }
 
     /*

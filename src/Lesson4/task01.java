@@ -84,7 +84,7 @@ public class task01 {
         }
     }
 
-    private static void fillInRandomIntInRange(Logger LOGGER, boolean debugMode, Random rnd,
+    public static void fillInRandomIntInRange(Logger LOGGER, boolean debugMode, Random rnd,
             LinkedList<Integer> linkedList,
             int minItem, int maxItem, int lengthLinkedList) {
         for (int i = 0; i < lengthLinkedList; i++) {
