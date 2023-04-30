@@ -6,10 +6,11 @@ import java.nio.file.Paths;
 import jdk.jfr.Recording;
 import jdk.jfr.consumer.RecordedEvent;
 import jdk.jfr.consumer.RecordingFile;
-
+import java.util.Deque;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.logging.*;
+import java.util.ArrayDeque;
 
 // Реализовать простой калькулятор
 
@@ -20,6 +21,7 @@ import java.util.logging.*;
 public class task03 {
 
     private static final Logger LOGGER = Logger.getLogger(task03.class.getName());
+    private static final Deque<Double> HISTORY = new ArrayDeque<>();
     public static void main(String[] args)throws Exception {
         // Создаем файловый обработчик
         FileHandler fileHandler = new FileHandler("task03Log.txt");

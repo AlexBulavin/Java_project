@@ -7,6 +7,8 @@ import jdk.jfr.Recording;
 import jdk.jfr.consumer.RecordedEvent;
 import jdk.jfr.consumer.RecordingFile;
 import java.util.Collections;
+import java.util.Deque;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -15,36 +17,104 @@ import java.util.logging.*;
 
 public class task03 {
 
+    private static final Deque<Double> HISTORY = new ArrayDeque<>();
+
     public static void main(String[] args) throws Exception {
         Logger LOGGER = Logger.getLogger(lesson.class.getName());
         // Создаем файловый обработчик
         FileHandler fileHandler = new FileHandler("Lesson4task03Log.txt", false);
         // Добавляем обработчик к логгеру
         LOGGER.addHandler(fileHandler);
-
+        boolean debugMode = false;
         // Начинаем запись событий
         Recording recording = new Recording();
         recording.start();
         // --------------- Начало рабочего кода ----------------------
         clearScreen();
-        // Задан целочисленный список ArrayList. Найти минимальное, максимальное и среднее из этого списка.
-
-        ArrayList <Integer> arr = new ArrayList<>();
-        Random rnd = new Random();
-        Integer arrSize = rnd.nextInt(10, 50);
-        
-        Double averageValue = 0.0;
-        for (int i = 0; i < arrSize; i++) {
-            arr.add(rnd.nextInt(50));
-            LOGGER.info("arr[" + i + "] = " + arr.get(i));
-            averageValue += arr.get(i);
+        // Реализовать простой калькулятор
+        // И запись двусторонней очереди или стека. Чтобы при вводе пользователем слова
+        // Отмена удалялась предыдущая операция
+        // Введите первое число: 12
+        // Введите операцию: +
+        // Введите второе число: 1
+        // Ответ: 13
+        clearScreen();
+        Scanner input = new Scanner(System.in);
+        while (true) { // Внешний бесконечный цикл, пока пользователь не введёт q, опрашиваем его
+            System.out.print("Введите первое число (или q для выхода): ");
+            String inputLine = input.nextLine();
+            if (inputLine.equalsIgnoreCase("q")) {
+                System.out.println("Вычисления завершены. Данные будут удалены.");
+                break;
+            }
+            double num1 = 0.0;
+            try {
+                num1 = Double.parseDouble(inputLine);
+                // Введенное значение является числом
+            } catch (NumberFormatException e) {
+                // Введенное значение не является числом
+                System.out.println("Введенные значения не являются числом или командой завершения программы.");
+            }
+            if (debugMode) LOGGER.info("Первое число: " + num1);
+            char operator = '\u0000'; // тип char ссылочный, поэтому присваиваем null pointer ссылку
+            String operates = "+-*/";
+            boolean historyEnabled = false;
+            while (true) {
+                System.out.print("Введите операцию +, -, *, / (или h для истории операций): ");
+                String operatorInput = input.nextLine();
+                if (operatorInput.equalsIgnoreCase("h")) {
+                    historyEnabled = true;
+                    printHistory();
+                    continue;
+                }
+                operator = operatorInput.charAt(0);
+                LOGGER.info("Операнд: " + operator);
+                if (operates.contains(Character.toString(operator))) {
+                    break;
+                } else {
+                    System.out.printf("Ошибка, введен: %s\n", operator);
+                    LOGGER.info("Ошибка, введен: " + operator);
+                }
+            }
+            System.out.print("Введите второе число: ");
+            double num2 = input.nextDouble();
+            LOGGER.info("Второе число: " + num2);
+            double result = 0;
+            switch (operator) {
+                case '+':
+                    result = num1 + num2;
+                    break;
+                case '-':
+                    result = num1 - num2;
+                    break;
+                case '*':
+                    result = num1 * num2;
+                    break;
+                case '/':
+                    result = num1 / num2;
+                    break;
+                default:
+                    System.out.println("Операция неверна.");
+                    LOGGER.info("Операция неверна." + operator);
+                    return;
+            }
+            String strResult = result % 1 != 0 ? String.format("%.2f", result) : String.format("%.0f", result);
+            System.out.printf("Ответ: %s\n", strResult);
+            LOGGER.info("Ответ: \n" + strResult);
+            // Добавляем результат в историю
+            if (historyEnabled) {
+                HISTORY.push(result);
+                historyEnabled = false;
+            }
+            // TODO: Возможно здесь ошибка
+            input.nextLine(); // очищаем буфер после ввода числа, чтобы корректно работало ввод следующей
+                              // операции
         }
-        averageValue = averageValue / arrSize;
-        System.out.println("Base arr:\t\t" + arr);     
-        System.out.println("min of arr =\t\t" + Collections.min(arr));
-        System.out.println("max of arr =\t\t" + Collections.max(arr));
-        System.out.println("average of arr =\t" + averageValue);
-   
+        // --------------- Окончание рабочего кода ----------------------
+        // Заканчиваем запись событий
+        // recording.interrupt();
+        // recording.join();
+
         // --------------- Окончание рабочего кода ----------------------
         // Останавливаем запись событий
         recording.stop();
@@ -72,14 +142,58 @@ public class task03 {
         }
     }
 
-    private static void min(ArrayList<Integer> arr) {
-    }
-
     /*
      * Метод очистки консоли терминала
      */
-    public static void clearScreen() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
+    private static void clearScreen() throws Exception {
+        Logger LOGGER = Logger.getLogger(lesson.class.getName());
+        // Создаем файловый обработчик
+        FileHandler fileHandler = new FileHandler("Lesson4task03LogclearScreen.txt", false);
+        // Добавляем обработчик к логгеру
+        LOGGER.addHandler(fileHandler);
+        try {
+            if (System.getProperty("os.name").contains("Windows")) {
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            } else {
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
+            }
+        } catch (IOException | InterruptedException ex) {
+            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
+        }
     }
+
+    private static void printHistory() {
+        System.out.println("История:");
+        for (Double result : HISTORY) {
+            System.out.println(result);
+        }
+    }
+/*
+    private static class Recording extends Thread {
+        @Override
+        public void run() {
+            Logger LOGGER = Logger.getLogger(lesson.class.getName());
+            // Создаем файловый обработчик
+            FileHandler fileHandler;
+            try {
+                fileHandler = new FileHandler("Lesson4task03Recording.txt", false);
+                // Добавляем обработчик к логгеру
+                LOGGER.addHandler(fileHandler);
+            } catch (SecurityException | IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            try {
+                while (true) {
+                    sleep(60000);
+                    String logContents = new String(Files.readAllBytes(Paths.get("calculator.log")));
+                    LOGGER.info(logContents);
+                }
+            } catch (IOException | InterruptedException ex) {
+                LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
+            }
+        }
+    }
+*/
 }
