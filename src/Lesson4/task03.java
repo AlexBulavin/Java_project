@@ -30,7 +30,7 @@ public class task03 {
         Recording recording = new Recording();
         recording.start();
         // --------------- Начало рабочего кода ----------------------
-        clearScreen();
+        clearScreen(debugMode);
         // Реализовать простой калькулятор
         // И запись двусторонней очереди или стека. Чтобы при вводе пользователем слова
         // Отмена удалялась предыдущая операция
@@ -38,31 +38,39 @@ public class task03 {
         // Введите операцию: +
         // Введите второе число: 1
         // Ответ: 13
-        clearScreen();
         Scanner input = new Scanner(System.in);
         double num1 = 0.0;
         while (true) { // Внешний бесконечный цикл, пока пользователь не введёт q, опрашиваем его
-            System.out.print("Введите первое число (или q для выхода): ");
-            String inputLine = input.nextLine();
+            String inputLine = firstNumInput(input);
             if (inputLine.equalsIgnoreCase("q")) {
                 System.out.println("Вычисления завершены. Данные будут удалены.");
                 break;
             }
-            
-            try {
-                num1 = Double.parseDouble(inputLine);
-                // Введенное значение является числом
-            } catch (NumberFormatException e) {
-                // Введенное значение не является числом
-                System.out.println("Введенные значения не являются числом или командой завершения программы.");
+            if (inputLine.equalsIgnoreCase("m")) {
+                if (!HISTORY.isEmpty()) {
+                    num1 = HISTORY.pollLast();
+                    System.out.println("Первое число  = " + num1);
+                } else {
+                    System.out.println("Нет сохранённых данных.\nПервое число  = " + num1);
+                }
+            } else {
+                try {
+                    num1 = Double.parseDouble(inputLine);
+                    // Введенное значение является числом
+                } catch (NumberFormatException e) {
+                    // Введенное значение не является числом
+                    System.out.println("Введенные значения не являются числом или командой завершения программы.");
+                }
             }
+
             if (debugMode)
                 LOGGER.info("Первое число: " + num1);
             char operator = '\u0000'; // тип char ссылочный, поэтому присваиваем null pointer ссылку
             String operates = "+-*/u";
             boolean historyEnabled = false;
             while (true) {
-                System.out.print("Введите операцию +, -, *, / (или u для извлечения последнего значения из истории операций): ");
+                System.out.print(
+                        "Введите операцию +, -, *, / (или u для извлечения последнего значения из истории операций): ");
                 String operatorInput = input.nextLine();
                 if (operatorInput.equalsIgnoreCase("u")) {
                     if (!HISTORY.isEmpty()) {
@@ -70,7 +78,7 @@ public class task03 {
                         num1 = HISTORY.pollLast();
                         System.out.println("Первое число = " + num1);
                     } else {
-                        System.out.println("Нет предыдущего значения в памяти: ");
+                        System.out.println("Нет предыдущего значения в памяти.\nПервое число =  " + num1);
                     }
                     continue;
                 }
@@ -101,7 +109,12 @@ public class task03 {
                     result = num1 * num2;
                     break;
                 case '/':
-                    result = num1 / num2;
+                    if (num2 != 0) {
+                        result = num1 / num2;
+                    } else {
+                        System.out.println("Деление на 0.\nВторое число = 1");
+                        result = num1;
+                    }
                     break;
                 default:
                     System.out.println("Операция неверна.");
@@ -118,7 +131,8 @@ public class task03 {
             historyEnabled = true;
 
             // TODO: Возможно здесь ошибка
-            input.nextLine(); // очищаем буфер после ввода числа, чтобы корректно работало ввод следующей операции
+            input.nextLine(); // очищаем буфер после ввода числа, чтобы корректно работало ввод следующей
+                              // операции
         }
         // --------------- Окончание рабочего кода ----------------------
         // Заканчиваем запись событий
@@ -152,15 +166,22 @@ public class task03 {
         }
     }
 
+    private static String firstNumInput(Scanner input) {
+        System.out.print("Введите первое число или m для извлечения сохранённого значения или q для выхода: ");
+        String inputLine = input.nextLine();
+        return inputLine;
+    }
+
     /*
      * Метод очистки консоли терминала
      */
-    private static void clearScreen() throws Exception {
+    private static void clearScreen(boolean debugMode) throws Exception {
         Logger LOGGER = Logger.getLogger(lesson.class.getName());
         // Создаем файловый обработчик
         FileHandler fileHandler = new FileHandler("Lesson4task03LogclearScreen.txt", false);
         // Добавляем обработчик к логгеру
-        LOGGER.addHandler(fileHandler);
+        if (debugMode)
+            LOGGER.addHandler(fileHandler);
         try {
             if (System.getProperty("os.name").contains("Windows")) {
                 new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
@@ -169,7 +190,8 @@ public class task03 {
                 System.out.flush();
             }
         } catch (IOException | InterruptedException ex) {
-            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
+            if (debugMode)
+                LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
         }
     }
 
