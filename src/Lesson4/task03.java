@@ -40,6 +40,7 @@ public class task03 {
         // Ответ: 13
         clearScreen();
         Scanner input = new Scanner(System.in);
+        double num1 = 0.0;
         while (true) { // Внешний бесконечный цикл, пока пользователь не введёт q, опрашиваем его
             System.out.print("Введите первое число (или q для выхода): ");
             String inputLine = input.nextLine();
@@ -47,7 +48,7 @@ public class task03 {
                 System.out.println("Вычисления завершены. Данные будут удалены.");
                 break;
             }
-            double num1 = 0.0;
+            
             try {
                 num1 = Double.parseDouble(inputLine);
                 // Введенное значение является числом
@@ -69,7 +70,7 @@ public class task03 {
                         num1 = HISTORY.pollLast();
                         System.out.println("Первое число = " + num1);
                     } else {
-                        System.out.print("Нет предыдущего значения в памяти: ");
+                        System.out.println("Нет предыдущего значения в памяти: ");
                     }
                     continue;
                 }
@@ -117,8 +118,7 @@ public class task03 {
             historyEnabled = true;
 
             // TODO: Возможно здесь ошибка
-            //input.nextLine(); // очищаем буфер после ввода числа, чтобы корректно работало ввод следующей
-                              // операции
+            input.nextLine(); // очищаем буфер после ввода числа, чтобы корректно работало ввод следующей операции
         }
         // --------------- Окончание рабочего кода ----------------------
         // Заканчиваем запись событий
