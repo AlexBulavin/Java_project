@@ -34,45 +34,50 @@ public class task03 {
         // Введите операцию: +
         // Введите второе число: 1
         // Ответ: 13
-    
+
         Scanner input = new Scanner(System.in);
         double num1 = 0.0;
         while (true) { // Внешний бесконечный цикл, пока пользователь не введёт q, опрашиваем его
-            String inputLine = firstNumInput(input);
-            if (inputLine.equalsIgnoreCase("q")) {
-                System.out.println("Вычисления завершены. Данные будут удалены.");
-                break;
-            }
-            if (inputLine.equalsIgnoreCase("Отмена")) {
-                if (!HISTORY.isEmpty()) {
-                    num1 = HISTORY.pollLast();
-                    System.out.println("Первое число  = " + num1);
+            if (HISTORY.isEmpty()) {
+                String inputLine = firstNumInput(input);
+                if (inputLine.equalsIgnoreCase("q")) {
+                    System.out.println("Вычисления завершены. Данные будут удалены.");
+                    break;
+                }
+                if (inputLine.equalsIgnoreCase("Отмена")) {
+                    if (!HISTORY.isEmpty()) {
+                        num1 = HISTORY.pollLast();
+                        System.out.println("Первое число  = " + num1);
+                    } else {
+                        System.out.println("Нет сохранённых данных.\nПервое число  = " + num1);
+                    }
                 } else {
-                    System.out.println("Нет сохранённых данных.\nПервое число  = " + num1);
+                    try {
+                        num1 = Double.parseDouble(inputLine);
+                        // Введенное значение является числом
+                    } catch (NumberFormatException e) {
+                        // Введенное значение не является числом
+                        System.out.println("Введенные значения не являются числом или командой завершения программы.");
+                    }
                 }
             } else {
-                try {
-                    num1 = Double.parseDouble(inputLine);
-                    // Введенное значение является числом
-                } catch (NumberFormatException e) {
-                    // Введенное значение не является числом
-                    System.out.println("Введенные значения не являются числом или командой завершения программы.");
-                }
+                num1 = HISTORY.getLast();
+                System.out.println("Первое число = " + num1);
             }
 
             if (debugMode)
                 LOGGER.info("Первое число: " + num1);
             char operator = '\u0000'; // тип char ссылочный, поэтому присваиваем null pointer ссылку
             String operates = "+-*/u";
-            boolean historyEnabled = false;
             while (true) {
                 System.out.print(
                         "Введите операцию +, -, *, / (или Отмена для извлечения последнего значения из истории операций): ");
                 String operatorInput = input.nextLine();
                 if (operatorInput.equalsIgnoreCase("Отмена")) {
                     if (!HISTORY.isEmpty()) {
-                        printHistory();
-                        num1 = HISTORY.pollLast();
+                        if(debugMode) printHistory();
+                        HISTORY.pollLast();
+                        num1 = HISTORY.getLast();
                         System.out.println("Первое число = " + num1);
                     } else {
                         System.out.println("Нет предыдущего значения в памяти.\nПервое число =  " + num1);
@@ -111,7 +116,7 @@ public class task03 {
                     } else {
                         System.out.println("Деление на 0.\nВторое число = 1");
                         if (debugMode)
-                        LOGGER.info("Деление на 0.\nВторое число = 1");
+                            LOGGER.info("Деление на 0.\nВторое число = 1");
                         result = num1;
                     }
                     break;
@@ -127,7 +132,6 @@ public class task03 {
                 LOGGER.info("Ответ: \n" + strResult);
             // Добавляем результат в историю
             HISTORY.addLast(result);
-            historyEnabled = true;
 
             input.nextLine(); // очищаем буфер после ввода числа, чтобы корректно работало ввод следующей
                               // операции
