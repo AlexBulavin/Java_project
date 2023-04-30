@@ -55,30 +55,39 @@ public class task03 {
                 // Введенное значение не является числом
                 System.out.println("Введенные значения не являются числом или командой завершения программы.");
             }
-            if (debugMode) LOGGER.info("Первое число: " + num1);
+            if (debugMode)
+                LOGGER.info("Первое число: " + num1);
             char operator = '\u0000'; // тип char ссылочный, поэтому присваиваем null pointer ссылку
-            String operates = "+-*/";
+            String operates = "+-*/u";
             boolean historyEnabled = false;
             while (true) {
-                System.out.print("Введите операцию +, -, *, / (или h для истории операций): ");
+                System.out.print("Введите операцию +, -, *, / (или u для извлечения последнего значения из истории операций): ");
                 String operatorInput = input.nextLine();
-                if (operatorInput.equalsIgnoreCase("h")) {
-                    historyEnabled = true;
-                    printHistory();
+                if (operatorInput.equalsIgnoreCase("u")) {
+                    if (!HISTORY.isEmpty()) {
+                        printHistory();
+                        num1 = HISTORY.pollLast();
+                        System.out.println("Первое число = " + num1);
+                    } else {
+                        System.out.print("Нет предыдущего значения в памяти: ");
+                    }
                     continue;
                 }
                 operator = operatorInput.charAt(0);
-                LOGGER.info("Операнд: " + operator);
+                if (debugMode)
+                    LOGGER.info("Операнд: " + operator);
                 if (operates.contains(Character.toString(operator))) {
                     break;
                 } else {
                     System.out.printf("Ошибка, введен: %s\n", operator);
-                    LOGGER.info("Ошибка, введен: " + operator);
+                    if (debugMode)
+                        LOGGER.info("Ошибка, введен: " + operator);
                 }
             }
             System.out.print("Введите второе число: ");
             double num2 = input.nextDouble();
-            LOGGER.info("Второе число: " + num2);
+            if (debugMode)
+                LOGGER.info("Второе число: " + num2);
             double result = 0;
             switch (operator) {
                 case '+':
@@ -95,19 +104,20 @@ public class task03 {
                     break;
                 default:
                     System.out.println("Операция неверна.");
-                    LOGGER.info("Операция неверна." + operator);
+                    if (debugMode)
+                        LOGGER.info("Операция неверна." + operator);
                     return;
             }
             String strResult = result % 1 != 0 ? String.format("%.2f", result) : String.format("%.0f", result);
             System.out.printf("Ответ: %s\n", strResult);
-            LOGGER.info("Ответ: \n" + strResult);
+            if (debugMode)
+                LOGGER.info("Ответ: \n" + strResult);
             // Добавляем результат в историю
-            if (historyEnabled) {
-                HISTORY.push(result);
-                historyEnabled = false;
-            }
+            HISTORY.addLast(result);
+            historyEnabled = true;
+
             // TODO: Возможно здесь ошибка
-            input.nextLine(); // очищаем буфер после ввода числа, чтобы корректно работало ввод следующей
+            //input.nextLine(); // очищаем буфер после ввода числа, чтобы корректно работало ввод следующей
                               // операции
         }
         // --------------- Окончание рабочего кода ----------------------
@@ -169,31 +179,33 @@ public class task03 {
             System.out.println(result);
         }
     }
-/*
-    private static class Recording extends Thread {
-        @Override
-        public void run() {
-            Logger LOGGER = Logger.getLogger(lesson.class.getName());
-            // Создаем файловый обработчик
-            FileHandler fileHandler;
-            try {
-                fileHandler = new FileHandler("Lesson4task03Recording.txt", false);
-                // Добавляем обработчик к логгеру
-                LOGGER.addHandler(fileHandler);
-            } catch (SecurityException | IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            try {
-                while (true) {
-                    sleep(60000);
-                    String logContents = new String(Files.readAllBytes(Paths.get("calculator.log")));
-                    LOGGER.info(logContents);
-                }
-            } catch (IOException | InterruptedException ex) {
-                LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
-            }
-        }
-    }
-*/
+    /*
+     * private static class Recording extends Thread {
+     * 
+     * @Override
+     * public void run() {
+     * Logger LOGGER = Logger.getLogger(lesson.class.getName());
+     * // Создаем файловый обработчик
+     * FileHandler fileHandler;
+     * try {
+     * fileHandler = new FileHandler("Lesson4task03Recording.txt", false);
+     * // Добавляем обработчик к логгеру
+     * LOGGER.addHandler(fileHandler);
+     * } catch (SecurityException | IOException e) {
+     * // TODO Auto-generated catch block
+     * e.printStackTrace();
+     * }
+     * try {
+     * while (true) {
+     * sleep(60000);
+     * String logContents = new
+     * String(Files.readAllBytes(Paths.get("calculator.log")));
+     * LOGGER.info(logContents);
+     * }
+     * } catch (IOException | InterruptedException ex) {
+     * LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
+     * }
+     * }
+     * }
+     */
 }
