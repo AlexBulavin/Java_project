@@ -6,12 +6,8 @@ import java.nio.file.Paths;
 import jdk.jfr.Recording;
 import jdk.jfr.consumer.RecordedEvent;
 import jdk.jfr.consumer.RecordingFile;
-import java.util.Collections;
 import java.util.Deque;
 import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
 import java.util.Scanner;
 import java.util.logging.*;
 
@@ -38,6 +34,7 @@ public class task03 {
         // Введите операцию: +
         // Введите второе число: 1
         // Ответ: 13
+    
         Scanner input = new Scanner(System.in);
         double num1 = 0.0;
         while (true) { // Внешний бесконечный цикл, пока пользователь не введёт q, опрашиваем его
@@ -46,7 +43,7 @@ public class task03 {
                 System.out.println("Вычисления завершены. Данные будут удалены.");
                 break;
             }
-            if (inputLine.equalsIgnoreCase("m")) {
+            if (inputLine.equalsIgnoreCase("Отмена")) {
                 if (!HISTORY.isEmpty()) {
                     num1 = HISTORY.pollLast();
                     System.out.println("Первое число  = " + num1);
@@ -70,9 +67,9 @@ public class task03 {
             boolean historyEnabled = false;
             while (true) {
                 System.out.print(
-                        "Введите операцию +, -, *, / (или u для извлечения последнего значения из истории операций): ");
+                        "Введите операцию +, -, *, / (или Отмена для извлечения последнего значения из истории операций): ");
                 String operatorInput = input.nextLine();
-                if (operatorInput.equalsIgnoreCase("u")) {
+                if (operatorInput.equalsIgnoreCase("Отмена")) {
                     if (!HISTORY.isEmpty()) {
                         printHistory();
                         num1 = HISTORY.pollLast();
@@ -113,6 +110,8 @@ public class task03 {
                         result = num1 / num2;
                     } else {
                         System.out.println("Деление на 0.\nВторое число = 1");
+                        if (debugMode)
+                        LOGGER.info("Деление на 0.\nВторое число = 1");
                         result = num1;
                     }
                     break;
@@ -123,21 +122,16 @@ public class task03 {
                     return;
             }
             String strResult = result % 1 != 0 ? String.format("%.2f", result) : String.format("%.0f", result);
-            System.out.printf("Ответ: %s\n", strResult);
+            System.out.printf("Ответ:\n%s %s %s = %s\n", num1, operator, num2, strResult);
             if (debugMode)
                 LOGGER.info("Ответ: \n" + strResult);
             // Добавляем результат в историю
             HISTORY.addLast(result);
             historyEnabled = true;
 
-            // TODO: Возможно здесь ошибка
             input.nextLine(); // очищаем буфер после ввода числа, чтобы корректно работало ввод следующей
                               // операции
         }
-        // --------------- Окончание рабочего кода ----------------------
-        // Заканчиваем запись событий
-        // recording.interrupt();
-        // recording.join();
 
         // --------------- Окончание рабочего кода ----------------------
         // Останавливаем запись событий
@@ -167,7 +161,7 @@ public class task03 {
     }
 
     private static String firstNumInput(Scanner input) {
-        System.out.print("Введите первое число или m для извлечения сохранённого значения или q для выхода: ");
+        System.out.print("Введите первое число или Отмена для извлечения сохранённого значения или q для выхода: ");
         String inputLine = input.nextLine();
         return inputLine;
     }
@@ -201,33 +195,4 @@ public class task03 {
             System.out.println(result);
         }
     }
-    /*
-     * private static class Recording extends Thread {
-     * 
-     * @Override
-     * public void run() {
-     * Logger LOGGER = Logger.getLogger(lesson.class.getName());
-     * // Создаем файловый обработчик
-     * FileHandler fileHandler;
-     * try {
-     * fileHandler = new FileHandler("Lesson4task03Recording.txt", false);
-     * // Добавляем обработчик к логгеру
-     * LOGGER.addHandler(fileHandler);
-     * } catch (SecurityException | IOException e) {
-     * // TODO Auto-generated catch block
-     * e.printStackTrace();
-     * }
-     * try {
-     * while (true) {
-     * sleep(60000);
-     * String logContents = new
-     * String(Files.readAllBytes(Paths.get("calculator.log")));
-     * LOGGER.info(logContents);
-     * }
-     * } catch (IOException | InterruptedException ex) {
-     * LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
-     * }
-     * }
-     * }
-     */
 }
