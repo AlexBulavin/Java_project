@@ -1,7 +1,8 @@
 package Lesson6;
 
 import java.util.*;
-import java.awt.Toolkit;
+// import org.jline.terminal.Terminal;
+// import org.jline.terminal.TerminalBuilder;
 
 public class task1 {
     public static void main(String[] args) {
@@ -25,6 +26,7 @@ public class task1 {
         for (Notebook notebook : filteredNotebooks) {
 
             System.out.println(string_counter % 2 == 0 ? ConsoleColors.WHITE_BACKGROUND + ConsoleColors.BLACK + notebook + ConsoleColors.RESET : notebook);
+            string_counter ++;
         }
     }
 
@@ -125,7 +127,7 @@ public class task1 {
                     }
                     break;
                 case 2:
-                    System.out.println("Выберите требуемый объем жесткого диска:" +
+                    System.out.println("Выберите требуемый объем жесткого диска:\n" +
                             "1 - 128ГБ\n" +
                             "2 - 256ГБ\n" +
                             "3 - 512ГБ\n" +
@@ -148,7 +150,7 @@ public class task1 {
                     }
                     break;
                 case 3:
-                    System.out.println("Выберите операционную систему:" +
+                    System.out.println("Выберите операционную систему:\n" +
                             "1 - Windows 7\n" +
                             "2 - Windows 8\n" +
                             "3 - Windows 10\n" +
@@ -187,15 +189,15 @@ public class task1 {
                     }
                     break;
                 case 4:
-                    System.out.println("Выберите цвет:" +
-                            "1 - Black" +
-                            "2 - Silver" +
-                            "3 - Red" +
-                            "4 - Grey" +
-                            "5 - Space Grey" +
-                            "6 - White" +
-                            "7 - Blue" +
-                            "8 - Gold");
+                    System.out.println("Выберите цвет:\n" +
+                            "1 - Black\n" +
+                            "2 - Silver\n" +
+                            "3 - Red\n" +
+                            "4 - Grey\n" +
+                            "5 - Space Grey\n" +
+                            "6 - White\n" +
+                            "7 - Blue\n" +
+                            "8 - Gold\n");
                     int color_choice = scanner.nextInt();
                     scanner.nextLine(); // Считываем символ новой строки после считывания числа
                     switch (color_choice) {
@@ -226,13 +228,13 @@ public class task1 {
                     }
                     break;
                 case 5:
-                    System.out.println("Выберите бренд:" +
-                            "1 - HP" +
-                            "2 - DELL" +
-                            "3 - Lenovo" +
-                            "4 - Apple" +
-                            "5 - Aser " +
-                            "6 - ASUS");
+                    System.out.println("Выберите бренд:\n" +
+                            "1 - HP\n" +
+                            "2 - DELL\n" +
+                            "3 - Lenovo\n" +
+                            "4 - Apple\n" +
+                            "5 - Aser\n" +
+                            "6 - ASUS\n");
                     int vendor_choice = scanner.nextInt();
                     scanner.nextLine(); // Считываем символ новой строки после считывания числа
                     switch (vendor_choice) {
@@ -257,12 +259,12 @@ public class task1 {
                     }
                     break;
                 case 6:
-                    System.out.println("Выберите размер экрана:" +
-                            "1 - 13,3" +
-                            "2 - 14,0" +
-                            "3 - 15,6" +
-                            "4 - 16,0" +
-                            "5 - 17,3");
+                    System.out.println("Выберите размер экрана:\n" +
+                            "1 - 13,3\n" +
+                            "2 - 14,0\n" +
+                            "3 - 15,6\n" +
+                            "4 - 16,0\n" +
+                            "5 - 17,3\n");
                     int screen_choice = scanner.nextInt();
                     scanner.nextLine(); // Считываем символ новой строки после считывания числа
                     switch (screen_choice) {
@@ -284,10 +286,10 @@ public class task1 {
                     }
                     break;
                 case 7:
-                    System.out.println("Выберите тип жёсткого диска:" +
-                            "1 - HDD" +
-                            "2 - SSD" +
-                            "3 - M.2");
+                    System.out.println("Выберите тип жёсткого диска:\n" +
+                            "1 - HDD\n" +
+                            "2 - SSD\n" +
+                            "3 - M.2\n");
                     int disk_choice = scanner.nextInt();
                     scanner.nextLine(); // Считываем символ новой строки после считывания числа
                     switch (disk_choice) {
@@ -415,7 +417,14 @@ public class task1 {
 
     // Метод для получения ширины окна вывода
     private static int getConsoleWidth() {
-        return Toolkit.getDefaultToolkit().getScreenSize().width;
+        // try {
+        //     Terminal terminal = TerminalBuilder.terminal();
+        //     return terminal.getWidth();
+        // } catch (Exception e) {
+        //     e.printStackTrace();
+        //     return -1;
+        // }
+        return 300;
     }
 
     // Метод для форматирования текста с пробелами перед ним
