@@ -7,6 +7,6 @@ abstract class AbstractClacc {
     // Конкретный метод
     void concreteMethod() {
         // Реализация метода
-        System.out.println("Щбщая реализация метода Abstract");
+        System.out.println("Oбщая реализация метода Abstract");
     }
 }

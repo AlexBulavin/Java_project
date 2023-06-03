@@ -1,6 +1,11 @@
 package Lesson7.Homework_Seminar2.task3;
 
 public interface I_Const_Extended extends I_Const {
+    
+    default String getAuthorUnknown() {
+        return "Авторство неизвестно";
+    }
+
     Book book6 = new Book("Михайловский замок", "Фёдор Сологуб");
     Book book7 = new Book("Белая гвардия", "Михаил Булгаков");
     Book book8 = new Book("Анна Каренина", "Лев Толстой");
@@ -16,5 +21,5 @@ public interface I_Const_Extended extends I_Const {
     Book book18 = new Book("Собачье сердце", "Михаил Булгаков");
     Book book19 = new Book("Доктор Живаго", "Борис Пастернак");
     Book book20 = new Book("Мы", "Евгений Замятин");
-
+    Book book21 = new Book("Сказки", "Ytbpdtcnty");
 }

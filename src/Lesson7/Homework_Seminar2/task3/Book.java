@@ -1,6 +1,6 @@
 package Lesson7.Homework_Seminar2.task3;
 
-public class Book implements I_Displayable, I_Borrowable, I_Searchable, I_Reservable, I_Updatable {
+public class Book extends AbstractBook implements I_Displayable, I_Borrowable, I_Searchable, I_Reservable, I_Updatable {
     String BOOK_WORD = "Книга '";
     private String title;
     private String author;
@@ -90,5 +90,23 @@ public class Book implements I_Displayable, I_Borrowable, I_Searchable, I_Reserv
         this.title = title;
         this.author = author;
         System.out.println("Информация о книге обновлена: " + title + " (" + author + ")");
+    }
+
+    @Override
+    void setTitle() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setTitle'");
+    }
+
+    @Override
+    void setAuthor() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setAuthor'");
+    }
+
+    @Override
+    void setAvailable() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setAvailable'");
     }
 }
