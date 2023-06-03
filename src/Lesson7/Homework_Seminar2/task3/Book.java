@@ -1,7 +1,7 @@
 package Lesson7.Homework_Seminar2.task3;
 
 public class Book implements I_Displayable, I_Borrowable, I_Searchable, I_Reservable, I_Updatable {
-    private static final String BOOK_WORD = "Книга '";
+    String BOOK_WORD = "Книга '";
     private String title;
     private String author;
     private boolean available;
