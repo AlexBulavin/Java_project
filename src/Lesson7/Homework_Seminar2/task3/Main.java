@@ -1,10 +1,24 @@
 package Lesson7.Homework_Seminar2.task3;
 
-public class Main implements I_Const{
+import java.lang.reflect.Field;
+
+public class Main implements I_Const_Extended {
     public static void main(String[] args) {
         Library library = new Library();
+        clearScreen();
+        System.out.println("\n\n\n*************************** Our Java Library ******************************\n\n\n");
+        Book[] books = new Book[20];
 
-        Book[] books = {book1, book2, book3, book4, book5};
+        Class<I_Const_Extended> constExtendedClass = I_Const_Extended.class;
+        Field[] fields = constExtendedClass.getFields();
+
+        for (int i = 0; i < fields.length; i++) {
+            try {
+                books[i] = (Book) fields[i].get(null);
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
 
         for (Book book : books) {
             library.addBook(book);
@@ -19,7 +33,7 @@ public class Main implements I_Const{
         Book temp_book = book2;
         library.removeBook(book2);
         System.out.println("Удаление книги: " + temp_book.getTitle() + " " + temp_book.getAuthor());
-        
+
         library.displayAvailableBooks();
 
         library.searchByAuthor("Михаил Булгаков");
