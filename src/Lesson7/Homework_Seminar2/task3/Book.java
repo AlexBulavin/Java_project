@@ -1,28 +1,6 @@
 package Lesson7.Homework_Seminar2.task3;
 
-interface Displayable {
-    void displayInfo();
-}
-
-interface Borrowable {
-    void borrow();
-    void returnBook();
-}
-
-interface Searchable {
-    boolean search(String keyword);
-}
-
-interface Reservable {
-    void reserve();
-    void cancelReservation();
-}
-
-interface Updatable {
-    void updateInfo(String title, String author);
-}
-
-public class Book implements Displayable, Borrowable, Searchable, Reservable, Updatable {
+public class Book implements I_Displayable, I_Borrowable, I_Searchable, I_Reservable, I_Updatable {
     private String title;
     private String author;
     private boolean available;
@@ -64,7 +42,6 @@ public class Book implements Displayable, Borrowable, Searchable, Reservable, Up
         System.out.println("Доступность: " + (available ? "Да" : "Нет"));
     }
 
-    
     public void displayInfo(Boolean author) {
         System.out.println("Название: " + title);
         System.out.println("Доступность: " + (available ? "Да" : "Нет"));
