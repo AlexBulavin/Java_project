@@ -1,6 +1,7 @@
 package Lesson7.Homework_Seminar2.task3;
 
 public class Book implements I_Displayable, I_Borrowable, I_Searchable, I_Reservable, I_Updatable {
+    private static final String BOOK_WORD = "Книга '";
     private String title;
     private String author;
     private boolean available;
@@ -51,9 +52,9 @@ public class Book implements I_Displayable, I_Borrowable, I_Searchable, I_Reserv
     public void borrow() {
         if (available) {
             available = false;
-            System.out.println("Книга '" + title + "' успешно взята в аренду.");
+            System.out.println(BOOK_WORD + title + "' успешно взята в аренду.");
         } else {
-            System.out.println("Книга '" + title + "' недоступна для аренды.");
+            System.out.println(BOOK_WORD + title + "' недоступна для аренды.");
         }
     }
 
@@ -61,9 +62,9 @@ public class Book implements I_Displayable, I_Borrowable, I_Searchable, I_Reserv
     public void returnBook() {
         if (!available) {
             available = true;
-            System.out.println("Книга '" + title + "' успешно возвращена.");
+            System.out.println(BOOK_WORD + title + "' успешно возвращена.");
         } else {
-            System.out.println("Книга '" + title + "' уже доступна.");
+            System.out.println(BOOK_WORD + title + "' уже доступна.");
         }
     }
 
