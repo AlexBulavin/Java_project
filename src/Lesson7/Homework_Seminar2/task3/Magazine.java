@@ -47,9 +47,9 @@ public class Magazine extends AbstractBook implements I_Displayable, I_Borrowabl
     public void borrow() {
         if (available) {
             available = false;
-            System.out.println(MAGAZINE_WORD + title + "' успешно взята в аренду.");
+            System.out.println(MAGAZINE_WORD + title + "' успешно взят в аренду.");
         } else {
-            System.out.println(MAGAZINE_WORD + title + "' недоступна для аренды.");
+            System.out.println(MAGAZINE_WORD + title + "' недоступен для аренды.");
         }
     }
 
@@ -57,9 +57,9 @@ public class Magazine extends AbstractBook implements I_Displayable, I_Borrowabl
     public void returnBook() {
         if (!available) {
             available = true;
-            System.out.println(MAGAZINE_WORD + title + "' успешно возвращена.");
+            System.out.println(MAGAZINE_WORD + title + "' успешно возвращен.");
         } else {
-            System.out.println(MAGAZINE_WORD + title + "' уже доступна.");
+            System.out.println(MAGAZINE_WORD + title + "' уже доступен.");
         }
     }
 
