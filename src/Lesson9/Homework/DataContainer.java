@@ -23,12 +23,12 @@ public class DataContainer<T> {
 
     public T get(int index) {
         if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException("Invalid index: " + index);
+            throw new IndexOutOfBoundsException("Индекс вышел за пределы диапазона" + "0 - " + size + " : " + index);
         }
         return data[index];
     }
 
-    public void sort(Comparator<? super T> comparator) {
+    public void sort(Comparator<? super T> comparator) {//означает, что comparator является объектом типа Comparator, который работает с типом T или его супертипом.
         Arrays.sort(data, 0, size, comparator);
     }
 
