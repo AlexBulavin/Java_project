@@ -10,28 +10,36 @@ public class CalculatorPresenter {
     }
 
     public void performCalculation() {
-        double number = view.getInputNumber();
+        model.setResult(view.getInputNumber("первое")); 
         char operator = view.getInputOperator();
-        double number_2 = view.getInputNumber();
-        model.setResult(number);
+        String symbols = "+-*/";
+        while (symbols.indexOf(operator) == -1) {
+            System.out.println("Несуществующий оператор, повторите ввод");
+            operator = view.getInputOperator();
+        }  
+        Double zero = view.getInputNumber("второе");
+        while (operator == '/' && zero == 0.0){
+            System.out.println("Деление на ноль, повторите ввод.");
+            zero = view.getInputNumber("второе");
+        }
+        calculation(operator, zero);
+        view.displayResult(model.getResult());
+    }
+
+    private void calculation(char operator, double number_2){
         switch (operator) {
             case '+':
                 model.add(number_2);
-                break;
+                return;
             case '-':
                 model.subtract(number_2);
-                break;
+                return;
             case '*':
                 model.multiply(number_2);
-                break;
+                return;
             case '/':
                 model.divide(number_2);
-                break;
-            default:
-                System.out.println("Invalid operator");
                 return;
         }
-
-        view.displayResult(model.getResult());
     }
 }

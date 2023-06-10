@@ -18,8 +18,8 @@ public class CalculatorModel {
     public void divide(double number) {
         CalculatorView localNumber = new CalculatorView();
         while (number == 0){
-            System.out.println("Cannot divide by zero, please enter another number");
-            number = localNumber.getInputNumber();
+            System.out.println("Деление на ноль, повторите ввод.");
+            number = localNumber.getInputNumber("второе");
         }
             result /= number;
     }
