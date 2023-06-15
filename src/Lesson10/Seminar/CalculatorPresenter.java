@@ -22,24 +22,24 @@ public class CalculatorPresenter {
             System.out.println("Деление на ноль, повторите ввод.");
             zero = view.getInputNumber("второе");
         }
-        calculation(operator, zero);
+        model.calculation(operator, zero);
         view.displayResult(model.getResult());
     }
 
-    private void calculation(char operator, double number_2){
-        switch (operator) {
-            case '+':
-                model.add(number_2);
-                return;
-            case '-':
-                model.subtract(number_2);
-                return;
-            case '*':
-                model.multiply(number_2);
-                return;
-            case '/':
-                model.divide(number_2);
-                return;
-        }
-    }
+    // private void calculation(char operator, double number_2){
+    //     switch (operator) {
+    //         case '+':
+    //             model.add(number_2);
+    //             break;
+    //         case '-':
+    //             model.subtract(number_2);
+    //             break;
+    //         case '*':
+    //             model.multiply(number_2);
+    //             break;
+    //         case '/':
+    //             model.divide(number_2);
+    //             break;
+    //     }
+    // }
 }

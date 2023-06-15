@@ -31,4 +31,21 @@ public class CalculatorModel {
     public void setResult(double result) {
         this.result = result;
     }
+
+    public void calculation(char operator, double number_2){
+        switch (operator) {
+            case '+':
+                add(number_2);
+                break;
+            case '-':
+                subtract(number_2);
+                break;
+            case '*':
+                multiply(number_2);
+                break;
+            case '/':
+                divide(number_2);
+                break;
+        }
+    }
 }
