@@ -1,7 +1,8 @@
 package Lesson12.Homework;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.util.List; 
+import java.util.List;
 
 public class ComplexCalculatorView {
     private Scanner scanner;
@@ -22,9 +23,9 @@ public class ComplexCalculatorView {
         }
     }
 
-    public char getInputOperator() {
-        System.out.print("Введите оператор (+, -, *, /, s, p): ");
-        return scanner.next().charAt(0);
+    public String getInputOperator() {
+        System.out.print("Введите оператор (+, -, *, /, sqrt, ^): ");
+        return scanner.next();
     }
 
     public void displayResult(ComplexNumber result) {
@@ -51,4 +52,3 @@ public class ComplexCalculatorView {
         System.out.flush();
     }
 }
-

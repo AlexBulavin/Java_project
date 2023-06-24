@@ -1,11 +1,14 @@
 package Lesson12.Homework;
 
+// ComplexCalculatorModel.java
+package Lesson12.Homework;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ComplexCalculatorModel {
     private ComplexNumber result;
-    private List<String> history;
+    private List<String> history; // Добавлен список для хранения истории операций
 
     public ComplexCalculatorModel() {
         this.result = new ComplexNumber(0, 0);
@@ -16,21 +19,21 @@ public class ComplexCalculatorModel {
         double realResult = result.getReal() + number.getReal();
         double complexityResult = result.getComplexity() + number.getComplexity();
         result = new ComplexNumber(realResult, complexityResult);
-        history.add(String.format("Addition: %s + %s", number, result));
+        history.add("Add: " + number.toString()); // Добавляем операцию в историю
     }
 
     public void subtract(ComplexNumber number) {
         double realResult = result.getReal() - number.getReal();
         double complexityResult = result.getComplexity() - number.getComplexity();
         result = new ComplexNumber(realResult, complexityResult);
-        history.add(String.format("Subtraction: %s - %s", number, result));
+        history.add("Subtract: " + number.toString()); // Добавляем операцию в историю
     }
 
     public void multiply(ComplexNumber number) {
         double realResult = (result.getReal() * number.getReal()) - (result.getComplexity() * number.getComplexity());
         double complexityResult = (result.getReal() * number.getComplexity()) + (result.getComplexity() * number.getReal());
         result = new ComplexNumber(realResult, complexityResult);
-        history.add(String.format("Multiplication: %s * %s", number, result));
+        history.add("Multiply: " + number.toString()); // Добавляем операцию в историю
     }
 
     public void divide(ComplexNumber number) {
@@ -39,24 +42,10 @@ public class ComplexCalculatorModel {
             double realResult = ((result.getReal() * number.getReal()) + (result.getComplexity() * number.getComplexity())) / divisor;
             double complexityResult = ((result.getComplexity() * number.getReal()) - (result.getReal() * number.getComplexity())) / divisor;
             result = new ComplexNumber(realResult, complexityResult);
-            history.add(String.format("Division: %s / %s", number, result));
+            history.add("Divide: " + number.toString()); // Добавляем операцию в историю
         } else {
             throw new IllegalArgumentException("Ошибка: деление на ноль");
         }
-    }
-
-    public void squareRoot() {
-        double realResult = Math.sqrt(result.getReal());
-        double complexityResult = Math.sqrt(result.getComplexity());
-        result = new ComplexNumber(realResult, complexityResult);
-        history.add(String.format("Square Root: √%s = %s", result, result));
-    }
-
-    public void power(ComplexNumber number) {
-        double realResult = Math.pow(result.getReal(), number.getReal());
-        double complexityResult = Math.pow(result.getComplexity(), number.getComplexity());
-        result = new ComplexNumber(realResult, complexityResult);
-        history.add(String.format("Power: %s ^ %s = %s", result, number, result));
     }
 
     public ComplexNumber getResult() {

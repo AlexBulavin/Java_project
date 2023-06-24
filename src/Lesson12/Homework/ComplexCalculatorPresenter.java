@@ -1,4 +1,7 @@
 package Lesson12.Homework;
+
+import java.util.List;
+
 public class ComplexCalculatorPresenter {
     private ComplexCalculatorView view;
     private ComplexCalculatorModel model;
@@ -14,28 +17,32 @@ public class ComplexCalculatorPresenter {
         ComplexNumber result = new ComplexNumber(realPart, imaginaryPart);
         model.setResult(result);
 
-        char operator = view.getInputOperator();
-        String symbols = "+-*/sp";
+        String operator = view.getInputOperator();
+        String symbols = "+-*/sqrt^";
         while (symbols.indexOf(operator) == -1) {
             System.out.println("Несуществующий оператор, повторите ввод");
             operator = view.getInputOperator();
         }
 
-        if (operator == 's' || operator == 'p') {
-            double realNumber = view.getInputNumber("вещественную");
-            double imaginaryNumber = view.getInputNumber("мнимую");
-            ComplexNumber number = new ComplexNumber(realNumber, imaginaryNumber);
-            model.calculation(operator, number);
+        double realNumber = view.getInputNumber("вещественную");
+        double imaginaryNumber = view.getInputNumber("мнимую");
+        ComplexNumber number = new ComplexNumber(realNumber, imaginaryNumber);
+
+        if (operator.equals("sqrt") || operator.equals("^")) {
+            model.calculation(operator.charAt(0), number);
         } else {
-            double realNumber = view.getInputNumber("вещественную");
-            double imaginaryNumber = view.getInputNumber("мнимую");
-            ComplexNumber number = new ComplexNumber(realNumber, imaginaryNumber);
-            model.calculation(operator, number);
+            model.calculation(operator.charAt(0), number);
         }
 
         view.displayResult(model.getResult());
-        view.displayHistory(model.getHistory());
+
+        List<String> history = model.getHistory();
+        view.displayHistory(history);
     }
 }
+
+}
+
+
 
 
