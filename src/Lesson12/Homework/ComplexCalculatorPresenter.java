@@ -1,10 +1,9 @@
 package Lesson12.Homework;
-
 public class ComplexCalculatorPresenter {
-    private CalculatorView view;
+    private ComplexCalculatorView view;
     private ComplexCalculatorModel model;
 
-    public ComplexCalculatorPresenter(CalculatorView view, ComplexCalculatorModel model) {
+    public ComplexCalculatorPresenter(ComplexCalculatorView view, ComplexCalculatorModel model) {
         this.view = view;
         this.model = model;
     }
@@ -16,17 +15,27 @@ public class ComplexCalculatorPresenter {
         model.setResult(result);
 
         char operator = view.getInputOperator();
-        String symbols = "+-*/";
+        String symbols = "+-*/sp";
         while (symbols.indexOf(operator) == -1) {
             System.out.println("Несуществующий оператор, повторите ввод");
             operator = view.getInputOperator();
         }
 
-        double realNumber = view.getInputNumber("вещественную");
-        double imaginaryNumber = view.getInputNumber("мнимую");
-        ComplexNumber number = new ComplexNumber(realNumber, imaginaryNumber);
-        model.calculation(operator, number);
+        if (operator == 's' || operator == 'p') {
+            double realNumber = view.getInputNumber("вещественную");
+            double imaginaryNumber = view.getInputNumber("мнимую");
+            ComplexNumber number = new ComplexNumber(realNumber, imaginaryNumber);
+            model.calculation(operator, number);
+        } else {
+            double realNumber = view.getInputNumber("вещественную");
+            double imaginaryNumber = view.getInputNumber("мнимую");
+            ComplexNumber number = new ComplexNumber(realNumber, imaginaryNumber);
+            model.calculation(operator, number);
+        }
+
         view.displayResult(model.getResult());
+        view.displayHistory(model.getHistory());
     }
 }
+
 

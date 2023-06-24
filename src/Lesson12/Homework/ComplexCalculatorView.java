@@ -1,12 +1,12 @@
 package Lesson12.Homework;
-
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.List; 
 
-public class CalculatorView {
+public class ComplexCalculatorView {
     private Scanner scanner;
 
-    public CalculatorView() {
+    public ComplexCalculatorView() {
         this.scanner = new Scanner(System.in);
     }
 
@@ -23,7 +23,7 @@ public class CalculatorView {
     }
 
     public char getInputOperator() {
-        System.out.print("Введите оператор (+, -, *, /): ");
+        System.out.print("Введите оператор (+, -, *, /, s, p): ");
         return scanner.next().charAt(0);
     }
 
@@ -36,6 +36,13 @@ public class CalculatorView {
         System.out.println("Результат: " + realPart + " " + "i * " + sign + Math.abs(imaginaryPart) + "i");
     }
 
+    public void displayHistory(List<String> history) {
+        System.out.println("История операций:");
+        for (String operation : history) {
+            System.out.println(operation);
+        }
+    }
+
     /**
      * Метод очистки консоли терминала
      */
@@ -44,3 +51,4 @@ public class CalculatorView {
         System.out.flush();
     }
 }
+
