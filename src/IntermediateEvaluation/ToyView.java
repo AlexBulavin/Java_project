@@ -1,7 +1,5 @@
 package IntermediateEvaluation;
 
-import Lesson11.Homework.Task4MVPandSOLID.I_PrintElementView;
-
 public class ToyView implements IToyView {
     @Override
     public void showPrizeToy(Toy toy){
