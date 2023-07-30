@@ -4,6 +4,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 import java.util.Random;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class ToyPresenterImpl implements IToyPresenter {
     private IToyModel model;
@@ -72,12 +74,22 @@ public class ToyPresenterImpl implements IToyPresenter {
         return prizeToys;
     }
 
-    // Метод для записи призовой игрушки в текстовый файл
+    // Метод для получения текущей даты и времени розыгрыша
+    private String getCurrentDateTime() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date();
+        return formatter.format(date);
+    }
+
+    // Метод для записи призовой игрушки и даты розыгрыша в текстовый файл
     public void writePrizeToyToFile(String fileName) {
         if (!prizeToys.isEmpty()) {
             Toy prizeToy = prizeToys.remove(0); // Получаем первую игрушку из списка призовых
+            String dateTime = getCurrentDateTime(); // Получаем текущую дату и время
+
             try (FileWriter writer = new FileWriter(fileName)) {
-                writer.write("Prize Toy: " + prizeToy.getName() + "\n");
+                writer.write("Призовая игрушка: " + prizeToy.getName() + "\n");
+                writer.write("Дата и время розыгрыша: " + dateTime + "\n");
                 // Здесь можно добавить еще информации об игрушке, если нужно
                 writer.flush();
             } catch (IOException e) {
