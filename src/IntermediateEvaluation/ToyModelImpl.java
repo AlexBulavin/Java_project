@@ -6,10 +6,12 @@ import java.util.List;
 public class ToyModelImpl implements IToyModel {
     private List<Toy> toys;
     private List<Toy> prizeToys;
+    private List<RaffleResult> raffleResults; // Add this list for storing raffle results
 
     public ToyModelImpl() {
         this.toys = new ArrayList<>();
         this.prizeToys = new ArrayList<>();
+        this.raffleResults = new ArrayList<>();
     }
 
     @Override
@@ -28,6 +30,11 @@ public class ToyModelImpl implements IToyModel {
     }
 
     @Override
+    public List<RaffleResult> getRaffleResults() {
+        return raffleResults;
+    }
+
+    @Override
     public List<Toy> getToys() {
         return toys;
     }
@@ -40,5 +47,10 @@ public class ToyModelImpl implements IToyModel {
     @Override
     public void removePrizeToy(Toy toy) {
         prizeToys.remove(toy);
+    }
+
+    private void addRaffleResult(boolean won, String prizeName) {
+        RaffleResult raffleResult = new RaffleResult(won, null, prizeName, 0);
+        raffleResults.add(raffleResult);
     }
 }

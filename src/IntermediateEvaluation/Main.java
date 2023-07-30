@@ -3,6 +3,10 @@ package IntermediateEvaluation;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
@@ -38,12 +42,50 @@ public class Main {
             presenter.addNewToy(4, "Мяч", 5, 25);
             presenter.addNewToy(5, "Конструктор", 8, 15);
         }
-        // Моделируем розыгрыш
-        presenter.performRaffle();
 
-        // Записываем призовую игрушку в файл
-        presenter.writePrizeToyToFile("prize_toy.txt");
+        // Scanner scanner = new Scanner(System.in);
+        while (true) {
+            view.showMainMenu(); // Отображаем главное меню
+            int choice = view.getUserChoice(); // Получаем выбор пользователя
+            
+            switch (choice) {
+                case 1:
+                    // Моделируем розыгрыш
+                    presenter.performRaffle();
+                    // Записываем призовую игрушку в файл
+                    presenter.writePrizeToyToFile("prize_toy.txt");
+                    break;
+                case 2:
+                    // Выводим список имеющихся призов
+                    List<Toy> prizeToys = presenter.getPrizeToys();
+                    showPrizeToysList(prizeToys);
+                    break;
+                case 3:
+                    // Выводим список состоявшихся розыгрышей
+                    List<RaffleResult> raffleResults = presenter.getRaffleResults();
+                    view.showRaffleResults(raffleResults);
+                    break;
+                case 0:
+                    // Выход из программы
+                    view.closeScanner(); // Закрываем Scanner
+                    System.out.println("Выход из программы. До свидания!");
+                    return;
+                default:
+                    System.out.println("Неверный выбор. Попробуйте еще раз.");
+            }
+        }
 
+    }
+
+    private static void showPrizeToysList(List<Toy> prizeToys) {
+        if (prizeToys.isEmpty()) {
+            System.out.println("Список призовых игрушек пуст.");
+        } else {
+            System.out.println("Список призовых игрушек:");
+            for (Toy toy : prizeToys) {
+                System.out.println(toy.getName() + " (Количество: " + toy.getQuantity() + ")");
+            }
+        }
     }
 
     /**
@@ -65,4 +107,5 @@ public class Main {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
+
 }

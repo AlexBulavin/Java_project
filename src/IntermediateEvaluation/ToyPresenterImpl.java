@@ -59,6 +59,10 @@ public class ToyPresenterImpl implements IToyPresenter {
         } else {
             view.showSorryMessage();
         }
+
+        // Displaying the list of raffle results
+        List<RaffleResult> raffleResults = model.getRaffleResults();
+        view.showRaffleResults(raffleResults);
     }
 
     @Override
@@ -97,5 +101,9 @@ public class ToyPresenterImpl implements IToyPresenter {
             }
         }
     }
-}
 
+    public List<RaffleResult> getRaffleResults() {
+        // Retrieve and return the list of raffle results from the model
+        return model.getRaffleResults();
+    }
+}

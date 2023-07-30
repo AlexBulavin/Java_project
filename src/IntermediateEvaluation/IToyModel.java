@@ -8,6 +8,7 @@ public interface IToyModel {
     List<Toy> getToys();
     List<Toy> getPrizeToys();
     void removePrizeToy(Toy toy);
+    List<RaffleResult> getRaffleResults();
 }
 
 
