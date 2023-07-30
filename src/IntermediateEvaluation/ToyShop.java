@@ -1,95 +1,89 @@
 package IntermediateEvaluation;
 
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
+public class ToyShop implements IToyModel, IToyPresenter {
 
-public class ToyShop implements IToyPresenter  {
-    private List<Toy> toys = new ArrayList<>();
-    private IView view;
-    private IPresenter presenter;
-
-    public interface IView {
-        void showPrizeToy(Toy toy);
-    }
-
-    public interface IPresenter {
-        void onToyAdded(Toy toy);
-        void onUpdateFrequency(int toyId, double newFrequency);
-        void onPlayGame();
-    }
+    private List<Toy> toys;
+    private List<Toy> prizeToys;
+    private IToyView view;
 
     public ToyShop(IToyView view) {
+        this.toys = new ArrayList<>();
+        this.prizeToys = new ArrayList<>();
         this.view = view;
     }
 
-
-    public void addToy(Toy toy) {
-        toys.add(toy);
-        presenter.onToyAdded(toy);
+    // Реализация методов интерфейса IToyModel
+    @Override
+    public void addToy(int id, String name, int quantity, double weight) {
+        toys.add(new Toy(id, name, quantity, weight));
     }
 
-    public void updateFrequency(int toyId, double newFrequency) {
+    @Override
+    public void updateToyWeight(int id, double weight) {
         for (Toy toy : toys) {
-            if (toy.getId() == toyId) {
-                toy.setFrequency(newFrequency);
-                presenter.onUpdateFrequency(toy.getId(), toy.getFrequency());
+            if (toy.getId() == id) {
+                toy.setWeight(weight);
                 break;
             }
         }
     }
 
-    public void playGame() {
-        List<Toy> prizeToys = new ArrayList<>();
+    @Override
+    public List<Toy> getToys() {
+        return toys;
+    }
+
+    @Override
+    public void removePrizeToy(Toy toy) {
+        prizeToys.remove(toy);
+    }
+
+    // Реализация методов интерфейса IToyPresenter
+    @Override
+    public void performRaffle() {
+        double totalWeight = toys.stream().mapToDouble(Toy::getWeight).sum();
+
+        Random random = new Random();
+        double randomWeight = random.nextDouble() * totalWeight;
+
         for (Toy toy : toys) {
-            int quantity = toy.getQuantity();
-            double frequency = toy.getFrequency();
-            for (int i = 0; i < quantity; i++) {
-                if (Math.random() < frequency / 100) {
-                    prizeToys.add(toy);
-                    toy.setQuantity(quantity - 1);
-                    break;
-                }
+            randomWeight -= toy.getWeight();
+            if (randomWeight <= 0) {
+                prizeToys.add(toy);
+                toy.setWeight(0); // Убираем игрушку из розыгрыша
+                break;
             }
         }
 
         if (!prizeToys.isEmpty()) {
-            Toy firstPrizeToy = prizeToys.get(0);
-            prizeToys.remove(0);
-            savePrizeToy(firstPrizeToy);
-            view.showPrizeToy(firstPrizeToy);
+            Toy prizeToy = prizeToys.get(prizeToys.size() - 1);
+            view.showCongratulationsMessage(prizeToy.getName());
+        } else {
+            view.showSorryMessage();
         }
+    
     }
 
-    private void savePrizeToy(Toy toy) {
-        try {
-            FileWriter writer = new FileWriter("prize_toys.txt", true);
-            writer.write(toy.getName());
-            writer.write(System.lineSeparator());
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+    @Override
+    public Toy getPrizeToy() {
+        if (!prizeToys.isEmpty()) {
+            return prizeToys.get(prizeToys.size() - 1); // Возвращаем последнюю призовую игрушку из списка
         }
+        return null; // Возвращаем null, если список призовых игрушек пустой
     }
 
     @Override
-    public void onToyAdded(Toy toy) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'onToyAdded'");
+    public List<Toy> getPrizeToys() {
+        return prizeToys;
     }
 
     @Override
-    public void onUpdateFrequency(int toyId, double newFrequency) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'onUpdateFrequency'");
-    }
-
-    @Override
-    public void onPlayGame() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'onPlayGame'");
+    public void addNewToy(int id, String name, int quantity, double weight) {
+        toys.add(new Toy(id, name, quantity, weight));
     }
 }
 

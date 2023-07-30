@@ -1,9 +1,7 @@
 package IntermediateEvaluation;
-
-public interface IToyView extends ToyShop.IView {
-
-    void showPrizeToy(Toy toy);
-
-    void showDialog();
+public interface IToyView {
+    void showCongratulationsMessage(String toyName);
+    void showSorryMessage();
 }
+
 

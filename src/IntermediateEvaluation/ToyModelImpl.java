@@ -5,9 +5,11 @@ import java.util.List;
 
 public class ToyModelImpl implements IToyModel {
     private List<Toy> toys;
+    private List<Toy> prizeToys;
 
     public ToyModelImpl() {
         this.toys = new ArrayList<>();
+        this.prizeToys = new ArrayList<>();
     }
 
     @Override
@@ -29,5 +31,14 @@ public class ToyModelImpl implements IToyModel {
     public List<Toy> getToys() {
         return toys;
     }
-}
 
+    @Override
+    public List<Toy> getPrizeToys() {
+        return prizeToys;
+    }
+
+    @Override
+    public void removePrizeToy(Toy toy) {
+        prizeToys.remove(toy);
+    }
+}
